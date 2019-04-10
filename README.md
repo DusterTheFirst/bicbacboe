@@ -2,6 +2,8 @@
 
 This here is the source code for the one and only BicBacBoe. BicBacBoe and all of its source code is licensed under the [GPL-3.0 License](#License).
 
+# About
+BicBacBoe started out as a way to learn how to develop full stack webapps and has evolved to, idk, this?
 
 ## License
         BicBacBoe 3 - Online Tic Tac Toe

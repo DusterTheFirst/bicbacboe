@@ -1,0 +1,11 @@
+{
+  "name": "@bicbacboe/protocol",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.ts",
+  "author": "DusterTheFirst <dusterthefirst@gmail.com> (Zachary Kohnen)",
+  "license": "GPL-3.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
