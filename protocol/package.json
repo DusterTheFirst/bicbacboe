@@ -2,7 +2,6 @@
   "name": "@bicbacboe/protocol",
   "version": "0.0.1",
   "private": true,
-  "main": "src/index.ts",
   "author": "DusterTheFirst <dusterthefirst@gmail.com> (Zachary Kohnen)",
   "license": "GPL-3.0",
   "scripts": {
@@ -11,5 +10,9 @@
   "devDependencies": {
     "tslint": "^5.15.0",
     "typescript": "^3.4.3"
+  },
+  "directories": {
+    "lib": "src",
+    "bin": "build"
   }
 }

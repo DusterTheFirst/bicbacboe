@@ -1,13 +1,14 @@
 {
   "name": "@bicbacboe/server",
   "version": "0.0.1",
-  "main": "src/app.ts",
+  "main": "build/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "DusterTheFirst <dusterthefirst@gmail.com> (Zachary Kohnen)",
   "license": "GPL-3.0",
   "dependencies": {
+    "@bicbacboe/protocol": "file:../protocol",
     "express": "^4.16.4"
   },
   "devDependencies": {

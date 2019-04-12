@@ -54,7 +54,7 @@
   },
   "references": [
     {
-      "path": "../protocol/tsconfig.json",
+      "path": "../protocol"
     }
   ]
 }
