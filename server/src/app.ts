@@ -1,4 +1,4 @@
-import { version } from "@bicbacboe/protocol";
+import {  } from "@bicbacboe/protocol";
 import express from "express";
 
 const app = express();
