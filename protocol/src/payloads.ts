@@ -15,9 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export const version = 0;
+export interface IPayload<O, D> {
+    opcode: O;
+    data: D;
+}
 
-export * from "./payloads";
-
-export * from "./payloads/client";
-export * from "./payloads/server";
+export interface IError<E, M> {
+    error: E;
+    message: M;
+}
