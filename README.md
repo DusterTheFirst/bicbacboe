@@ -5,6 +5,10 @@ This here is the source code for the one and only BicBacBoe. BicBacBoe and all o
 # About
 BicBacBoe started out as a way to learn how to develop full stack webapps and has evolved to, idk, this?
 
+# Protocol
+![REST Workflow](diagrams/REST-flow.svg)
+![WebSocket Workflow](diagrams/ws-flow.svg)
+
 ## License
         BicBacBoe 3 - Online Tic Tac Toe
         Copyright (C) 2019  DusterTheFirst
