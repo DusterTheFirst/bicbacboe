@@ -7,7 +7,7 @@ BicBacBoe started out as a way to learn how to develop full stack webapps and ha
 
 # Protocol
 ![REST Workflow](diagrams/REST-flow.svg)
-![WebSocket Workflow](diagrams/ws-flow.svg)
+![WebSocket Workflow](diagrams/WS-flow.svg)
 
 ## License
         BicBacBoe 3 - Online Tic Tac Toe
