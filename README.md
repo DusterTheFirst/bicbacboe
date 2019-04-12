@@ -2,6 +2,8 @@
 
 This here is the source code for the one and only BicBacBoe. BicBacBoe and all of its source code is licensed under the [GPL-3.0 License](#License).
 
+For questions or concerns regarding the development of this project please direct them towards the GH issues, or email [info@bicbacboe.com](mailto:info@bicbacboe.com)
+
 # About
 BicBacBoe started out as a way to learn how to develop full stack webapps and has evolved to, idk, this?
 
