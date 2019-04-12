@@ -16,6 +16,5 @@
  */
 
 export * from "./payloads";
-
-export * from "./payloads/client";
-export * from "./payloads/server";
+export * from "./client";
+export * from "./server";

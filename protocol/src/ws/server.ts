@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { IError, IPayload } from "../payloads";
+import { IError, IPayload } from "./payloads";
 
 /** Payloads sent from the server to the client */
 export type ServerPayload =

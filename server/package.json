@@ -8,7 +8,6 @@
   "author": "DusterTheFirst <dusterthefirst@gmail.com> (Zachary Kohnen)",
   "license": "GPL-3.0",
   "dependencies": {
-    "@bicbacboe/protocol": "file:../protocol",
     "express": "^4.16.4"
   },
   "devDependencies": {
