@@ -15,6 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from "./payloads";
-export * from "./client";
-export * from "./server";
+import {  } from "../../protocol/build/ws/";
+import express from "express";
+
+const app = express();
+
+const port = process.env.PORT == null ? 8080 : process.env.PORT;
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+console.log(ClientErrorCode);
