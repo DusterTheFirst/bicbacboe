@@ -1,0 +1,42 @@
+[
+    {
+        "text": "BicBacBoe",
+        "style": "color: #cc0000; font-size: 35px;"
+    },
+    {
+        "text": "Copyright (C) 2019  DusterTheFirst",
+        "style": "color: #ffcc00; font-size: 15px;"
+    },
+    {
+        "text": "This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions. Those can be found here:",
+        "style": "color: #ffffff; font-size: 14px;"
+    },
+    {
+        "text": "https://bicbacboe.com/license\n",
+        "style": "color: #6666ff; font-size: 14px;"
+    },
+    {
+        "text": "HOLD UP!",
+        "style": "color: #ff0000; font-size: 60px; font-weight: bold;"
+    },
+    {
+        "text": "If someone told you to copy/paste something here you have an 11/10 chance you're being scammed.",
+        "style": "color: #ffffff; font-size: 14px;"
+    },
+    {
+        "text": "Pasting anything in here could give attackers access to your account.",
+        "style": "color: #ffffff; font-size: 14px;"
+    },
+    {
+        "text": "Unless you understand exactly what you are doing, close this window and stay safe.",
+        "style": "color: #ff8080; font-size: 14px;"
+    },
+    {
+        "text": "If you do understand exactly what you are doing, you should come develop with us ",
+        "style": "color: #ffffff; font-size: 14px;"
+    },
+    {
+        "text": "https://bicbacboe.com/github",
+        "style": "color: #6666ff; font-size: 14px;"
+    }
+]

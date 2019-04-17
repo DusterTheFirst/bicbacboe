@@ -41,7 +41,10 @@
         ],
         "file-name-casing": [
             true,
-            "camel-case"
+            {
+                ".tsx": "pascal-case",
+                ".ts": "camel-case"
+            }
         ],
         "forin": false,
         "import-blacklist": false,
@@ -87,7 +90,7 @@
         "no-empty": true,
         "no-empty-interface": true,
         "no-eval": true,
-        "no-floating-promises": true,
+        "no-floating-promises": false,
         "no-for-in-array": true,
         "no-implicit-dependencies": true,
         "no-import-side-effect": true,
@@ -128,7 +131,6 @@
         "no-unsafe-any": true,
         "no-unsafe-finally": true,
         "no-unused-expression": true,
-        "no-unused-variable": true,
         "no-use-before-declare": true,
         "no-var-keyword": true,
         "no-var-requires": true,
@@ -178,7 +180,6 @@
         "type-literal-delimiter": true,
         "typedef": true,
         "typedef-whitespace": true,
-        "typeof-compare": true,
         "unified-signatures": true,
         "use-default-type-parameter": true,
         "use-isnan": true,

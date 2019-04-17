@@ -6,7 +6,9 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@bicbacboe/protocol": "0.0.1",
-    "express": "^4.16.4"
+    "@types/express-ws": "^3.0.0",
+    "express": "^4.16.4",
+    "express-ws": "^4.0.0"
   },
   "devDependencies": {
     "@types/express": "^4.16.1"

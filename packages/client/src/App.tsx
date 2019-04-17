@@ -15,21 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import express from "express";
-import expressws from "express-ws";
-import {  } from "../../protocol/build/ws/client";
+import React, { Component } from "react";
+import {} from "../../protocol/build/ws/client";
+import "./App.scss";
 
-const app = express();
-const wsapp = expressws(app);
+class App extends Component {
+    public render() {
+        return (
+            <div className="app">
+                test
+            </div>
+        );
+    }
+}
 
-const wsRouter = express.Router();
-wsRouter.ws("/game-listing", (ws, req) => {
-    
-});
-
-app.use("/ws", wsRouter);
-
-const port = process.env.PORT === undefined ? 8080 : process.env.PORT;
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
-// console.log(ClientErrorCode);
+export default App;

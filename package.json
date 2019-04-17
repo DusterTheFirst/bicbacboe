@@ -4,15 +4,23 @@
         "packages/*"
     ],
     "scripts": {
-        // "build": "tsc -b --clean packages/server && cd packages/client && npm build",
-        "dev:server": "nodemon --exec run-s -s build:server start:server",
-        "build:server": "tsc -b -c packages/server",
-        "start:server": "node server/build/app.js"
-        // "start": "nodemon packages/server & (cd packages/client && npm start)"
+        "dev:server": "nodemon --config packages/server/nodemon.json",
+        "dev:client": "cd packages/client && yarn start",
+        "clean:server": "tsc -b --clean packages/server",
+        "clean:protocol": "tsc -b --clean packages/protocol",
+        "clean": "run-p clean:**",
+        "force-clean": "rimraf packages/**/build",
+        "build:server": "tsc -b packages/server",
+        "start:server": "node packages/server",
+        "lint:server": "tslint -p packages/server/tsconfig.json",
+        "lint:protocol": "tslint -p packages/protocol/tsconfig.json",
+        "lint:client": "tslint -p packages/client/tsconfig.json",
+        "lint": "run-p -c lint:**"
     },
     "devDependencies": {
         "npm-run-all": "^4.1.5",
-        "tslint": "^5.15.0",
+        "rimraf": "^2.6.3",
+        "tslint": "^5.16.0",
         "typescript": "^3.4.3"
     }
 }

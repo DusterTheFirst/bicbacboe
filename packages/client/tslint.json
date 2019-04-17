@@ -2,10 +2,9 @@
     "extends": [
         "tslint:recommended",
         "tslint-react",
-        "tslint-config-prettier",
-        "../tslint.json"
+        "../../tslint.json"
     ],
     "rules": {
-        "no-import-side-effect": false, 
+        "no-import-side-effect": false
     }
 }
