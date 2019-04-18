@@ -1,20 +1,22 @@
 {
     "private": true,
     "workspaces": [
-        "packages/*"
+        "client",
+        "server",
+        "protocol"
     ],
     "scripts": {
-        "dev:server": "nodemon --config packages/server/nodemon.json",
-        "dev:client": "cd packages/client && yarn start",
-        "clean:server": "tsc -b --clean packages/server",
-        "clean:protocol": "tsc -b --clean packages/protocol",
+        "dev:server": "nodemon --config server/nodemon.json",
+        "dev:client": "cd client && yarn start",
+        "clean:server": "tsc -b --clean server",
+        "clean:protocol": "tsc -b --clean protocol",
         "clean": "run-p clean:**",
-        "force-clean": "rimraf packages/**/build",
-        "build:server": "tsc -b packages/server",
-        "start:server": "node packages/server",
-        "lint:server": "tslint -p packages/server/tsconfig.json",
-        "lint:protocol": "tslint -p packages/protocol/tsconfig.json",
-        "lint:client": "tslint -p packages/client/tsconfig.json",
+        "force-clean": "rimraf {client,server,protocol}/build",
+        "build:server": "tsc -b server",
+        "start:server": "node server",
+        "lint:server": "tslint -p server/tsconfig.json",
+        "lint:protocol": "tslint -p protocol/tsconfig.json",
+        "lint:client": "tslint -p client/tsconfig.json",
         "lint": "run-p -c lint:**"
     },
     "devDependencies": {
