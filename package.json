@@ -3,19 +3,19 @@
     "workspaces": [
         "client",
         "server",
-        "protocol"
+        "api"
     ],
     "scripts": {
         "dev:server": "nodemon --config server/nodemon.json",
         "dev:client": "cd client && yarn start",
         "clean:server": "tsc -b --clean server",
-        "clean:protocol": "tsc -b --clean protocol",
+        "clean:api": "tsc -b --clean api",
         "clean": "run-p clean:**",
-        "force-clean": "rimraf {client,server,protocol}/build",
+        "force-clean": "rimraf {client,server,api}/build",
         "build:server": "tsc -b server",
         "start:server": "node server",
         "lint:server": "tslint -p server/tsconfig.json",
-        "lint:protocol": "tslint -p protocol/tsconfig.json",
+        "lint:api": "tslint -p api/tsconfig.json",
         "lint:client": "tslint -p client/tsconfig.json",
         "lint": "run-p -c lint:**"
     },

@@ -17,7 +17,7 @@
 
 import express from "express";
 import expressws from "express-ws";
-import {  } from "../../protocol/build/ws/client";
+import {  } from "@bicbacboe/api/build/ws/client";
 
 const app = express();
 const wsapp = expressws(app);

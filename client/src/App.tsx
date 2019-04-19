@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {ClientErrorCode} from "../../protocol/build/ws/client";
+import {ClientErrorCode} from "@bicbacboe/api/build/ws/client";
 import React, { Component } from "react";
 import "./App.scss";
 

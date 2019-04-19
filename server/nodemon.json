@@ -1,7 +1,7 @@
 {
     "watch": [
-        "packages/server",
-        "packages/protocol"
+        "server",
+        "api"
     ],
     "exec": "run-s build:server start:server",
     "ext": "ts"
