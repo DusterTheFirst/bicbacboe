@@ -12,7 +12,7 @@
         "clean:api": "tsc -b --clean api",
         "clean": "run-p -s clean:**",
         "force-clean": "rimraf {client,server,api}/build",
-        "build:client": "cd client && yarn build",
+        "build:client": "cd client && pwd && yarn build",
         "build:server": "tsc -b server",
         "build:api": "tsc -b api",
         "build": "run-p -cs build:**",
