@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "11"
+  - "10"
 cache: yarn
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
@@ -8,19 +9,9 @@ before_install:
 jobs:
   include:
     - stage: build
-      name: Build API
-      script: yarn build:api
-    - name: Build client
-      script: yarn build:client
-    - name: Build server
-      script: yarn build:server
+      script: yarn build
     # TODO: Test
     # TODO: allow fail
     - stage: lint
-      name: Lint API
-      script: yarn lint:api
-    - name: Lint client
-      script: yarn lint:client
-    - name: Lint server
-      script: yarn lint:server
+      script: yarn lint
     # TODO: Deploy
