@@ -15,32 +15,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { IError, IPayload } from "./payloads";
-
-/** Payloads sent from the client from the server */
-export type ClientPayload =
-    IPayload<ClientOpcode.Auth, ClientPayloadData.IAuth>;
-
 /** Opcodes to identify client payloads */
 export enum ClientOpcode {
     /** Authentication payload (Broadcasts identity to the server) */
     Auth
 }
 
+/** Payloads sent from the client from the server mapped by their opcodes */
+export interface IClientPayloadMap {
+    [ClientOpcode.Auth]: ClientPayloadData.IAuth;
+}
+
 export namespace ClientPayloadData {
     /** Authentication payload (Broadcasts identity to the server) */
     export interface IAuth {
         /** The JWT token describing the user */
-        usertoken?: string;
+        usertoken: string;
     }
 }
-
-/** Errors sent from the client to the server */
-export type ClientErrors =
-    IError<ClientErrorCode.UnknownError, Error>;
 
 /** The error codes to identify errors */
 export enum ClientErrorCode {
     /** An unknown error that has not been caught */
     UnknownError
+}
+
+/** Errors sent from the client to the server */
+export interface IClientErrorMap {
+    [ClientErrorCode.UnknownError]: Error;
 }

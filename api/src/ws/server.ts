@@ -15,16 +15,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { IError, IPayload } from "./payloads";
-
-/** Payloads sent from the server to the client */
-export type ServerPayload =
-    IPayload<ServerOpcode.AuthSuccess, ServerPayloadData.IAuthSuccess>;
-
 /** Opcodes to identify server payloads */
 export enum ServerOpcode {
     /** Reply to authentication payload (Verified identity) */
     AuthSuccess
+}
+
+/** Payloads sent from the server to the client mapped by their opcode */
+export interface IServerPayloadMap {
+    [ServerOpcode.AuthSuccess]: ServerPayloadData.IAuthSuccess;
 }
 
 /** All of the interfaces defining the payload data */
@@ -36,14 +35,15 @@ export namespace ServerPayloadData {
     }
 }
 
-/** Errors sent by the server to the client */
-export type ServerError =
-    IError<ServerErrorCode, ServerErrorData.IAuthFailure>;
-
 /** The error codes to identify errors */
 export enum ServerErrorCode {
     /** Reply to authentication payload (Rejected identity) */
     AuthFailure
+}
+
+/** Errors sent by the server to the client */
+export interface IServerErrorMap {
+    [ServerErrorCode.AuthFailure]: ServerErrorData.IAuthFailure;
 }
 
 /** All of the interfaces defining the error data */

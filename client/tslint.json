@@ -2,7 +2,7 @@
     "extends": [
         "tslint:recommended",
         "tslint-react",
-        "../../tslint.json"
+        "../tslint.json"
     ],
     "rules": {
         "no-import-side-effect": false

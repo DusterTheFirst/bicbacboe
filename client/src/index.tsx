@@ -15,9 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import "normalize.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App from "./components/App";
 import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
 import welcome from "./welcome.json";

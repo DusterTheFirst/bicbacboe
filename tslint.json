@@ -42,6 +42,7 @@
         "file-name-casing": [
             true,
             {
+                "index.ts(x)": "camel-case",
                 ".tsx": "pascal-case",
                 ".ts": "camel-case"
             }

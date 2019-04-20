@@ -15,20 +15,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {ClientErrorCode} from "@bicbacboe/api/build/ws/client";
 import React, { Component } from "react";
-import "./App.scss";
+import "./MainMenu.scss";
 
-alert(JSON.stringify(ClientErrorCode, undefined, 4));
-
-class App extends Component {
+export default class MainMenu extends Component {
     public render() {
         return (
-            <div className="app">
-                test
+            <div className="mainmenu">
+                <h1 className="title">BicBacBoe</h1>
+                <div className="playoptions">
+                    <div className="join button" onClick={() => alert("join Game")}>Join Game</div>
+                    <div className="create button" onClick={() => alert("create Game")}>Create Game</div>
+                </div>
             </div>
-        );
+        )
     }
 }
-
-export default App;
