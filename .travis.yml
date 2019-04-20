@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "11"
+cache: yarn
+jobs:
+  include:
+    - stage: lint
+      script: yarn lint:api
+    - script: yarn lint:client
+    - script: yarn lint:server
+    - stage: build
+      script: yarn build:api
+    - script: yarn build:client
+    - script: yarn build:server
+    # TODO: Deploy
