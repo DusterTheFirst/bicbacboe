@@ -1,4 +1,5 @@
 # BicBacBoe 3
+[![Build Status](https://travis-ci.org/DusterTheFirst/bicbacboe.svg?branch=master)](https://travis-ci.org/DusterTheFirst/bicbacboe)
 
 This here is the source code for the one and only BicBacBoe. BicBacBoe and all of its source code is licensed under the [GPL-3.0 License](#License).
 
