@@ -28,6 +28,6 @@ export default class MainMenu extends Component {
                     <div className="create button" onClick={() => alert("create Game")}>Create Game</div>
                 </div>
             </div>
-        )
+        );
     }
 }
