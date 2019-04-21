@@ -15,20 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from "react";
-import { HashRouter } from "react-router-dom";
-import { WebsocketClient } from "../api/websocketClient";
-import "./App.scss";
-import MainMenu from "./MainMenu";
+import React from "react";
 
-class App extends Component {
-    public render() {
-        return (
-            <div className="app">
-                <MainMenu />
-            </div>
-        );
-    }
+/** The section of the menu dedicated to finding and joining a game */
+export function JoinMenu() {
+    return (
+        <>
+            join
+        </>
+    );
 }
-
-export default App;

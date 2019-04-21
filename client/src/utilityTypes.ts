@@ -15,20 +15,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from "react";
-import { HashRouter } from "react-router-dom";
-import { WebsocketClient } from "../api/websocketClient";
-import "./App.scss";
-import MainMenu from "./MainMenu";
-
-class App extends Component {
-    public render() {
-        return (
-            <div className="app">
-                <MainMenu />
-            </div>
-        );
-    }
-}
-
-export default App;
+export type FilterObjectKeysByType<O, T> = {
+    [K in keyof O]: O[K] extends T ? K : never;
+}[keyof O];

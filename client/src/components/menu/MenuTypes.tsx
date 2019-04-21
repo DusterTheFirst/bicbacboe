@@ -15,20 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from "react";
-import { HashRouter } from "react-router-dom";
-import { WebsocketClient } from "../api/websocketClient";
-import "./App.scss";
-import MainMenu from "./MainMenu";
+import React from "react";
+import { Link } from "react-router-dom";
+import { CreateMenu } from "./CreateMenu";
+import { JoinMenu } from "./JoinMenu";
 
-class App extends Component {
-    public render() {
-        return (
-            <div className="app">
-                <MainMenu />
-            </div>
-        );
-    }
+/** The dashboard view of the main menu */
+export function DashboardMenu() {
+    return (
+        <>
+            <div>This would be a dashboard view</div>
+            <JoinMenu />
+            <CreateMenu />
+        </>
+    );
 }
 
-export default App;
+/** The segemented path based view of the main menu */
+export function ChoiceMenu() {
+    return (
+        <div className="playoptions">
+            <Link to="/join" className="join">Join Game</Link>
+            <Link to="/create" className="create">Create Game</Link>
+        </div>
+    );
+}

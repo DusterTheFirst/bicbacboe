@@ -18,12 +18,18 @@
 import "normalize.css";
 import React from "react";
 import ReactDOM from "react-dom";
+import { HashRouter } from "react-router-dom";
 import App from "./components/App";
 import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
 import welcome from "./welcome.json";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+    (
+        <HashRouter>
+            <App />
+        </HashRouter>
+    ), document.getElementById("root"));
 
 const textoutlinecss = "text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;";
 

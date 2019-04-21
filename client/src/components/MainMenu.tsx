@@ -16,18 +16,49 @@
  */
 
 import React, { Component } from "react";
-import "./MainMenu.scss";
+import Media from "react-media";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { CreateMenu } from "./menu/CreateMenu";
+import { JoinMenu } from "./menu/JoinMenu";
+import { ChoiceMenu, DashboardMenu } from "./menu/MenuTypes";
 
+/** The main menu where the user changes settings and creates or joins games */
 export default class MainMenu extends Component {
     public render() {
         return (
             <div className="mainmenu">
                 <h1 className="title">BicBacBoe</h1>
-                <div className="playoptions">
-                    <div className="join button" onClick={() => alert("join Game")}>Join Game</div>
-                    <div className="create button" onClick={() => alert("create Game")}>Create Game</div>
-                </div>
+                <Media query={{ maxWidth: 599 }} children={this.MenuSwitch} />
             </div>
         );
+    }
+
+    /** Switch the menu shown according to if the device is a mobile device */
+    private readonly MenuSwitch = (isChoice: boolean) => {
+        if (isChoice) {
+            // If mobile, seperate screens into seperate routes
+            return (
+                <div className="choice">
+                    <Switch>
+                        <Route path="/" exact={true} component={ChoiceMenu} />
+                        <Route path="/join/" component={JoinMenu} />
+                        <Route path="/create/" component={CreateMenu} />
+                    </Switch>
+                </div>
+            );
+        } else {
+            // If desktop, show all screens together like a dashboard
+            return (
+                <div className="dashboard">
+                    <Switch>
+                        <Route path="/" exact={true} component={DashboardMenu} />
+
+                        {/* Redirect from mobile urls if given, or if size changes */}
+                        <Redirect from="/join/" to="/" />
+                        <Redirect from="/create/" to="/" />
+                    </Switch>
+                </div>
+            );
+        }
     }
 }
