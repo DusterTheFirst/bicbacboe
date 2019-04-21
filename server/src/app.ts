@@ -22,12 +22,12 @@ import expressws from "express-ws";
 const app = express();
 const wsapp = expressws(app);
 
-const wsRouter = express.Router();
-wsRouter.ws("/game-listing", (ws, req) => {
-    
-});
+// const wsRouter = express.Router();
+// wsRouter.ws("/game-listing", (ws, req) => {
 
-app.use("/ws", wsRouter);
+// });
+
+// app.use("/ws", wsRouter);
 
 const port = process.env.PORT === undefined ? 8080 : process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));

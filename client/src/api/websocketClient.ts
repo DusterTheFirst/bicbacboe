@@ -30,11 +30,11 @@ export class WebsocketClient {
     }
 
     public on<O extends keyof IServerPayloadMap, D extends IServerPayloadMap[O]>(opcode: O, handler: (data: D) => void) {
-
+        // TODO:
     }
 
     public onerror<E extends keyof IServerErrorMap, M extends IServerErrorMap[E]>(errorcode: E, handler: (message: M) => void) {
-
+        // TODO:
     }
 
     public send<O extends keyof IClientPayloadMap, D extends IClientPayloadMap[O]>(opcode: O, data: D) {
@@ -47,12 +47,12 @@ export class WebsocketClient {
 
 }
 
-let client = new WebsocketClient("ewewe");
+// let client = new WebsocketClient("ewewe");
 
-client.on(ServerOpcode.AuthSuccess, (data) => {
+// client.on(ServerOpcode.AuthSuccess, (data) => {
 
-});
+// });
 
-client.send(ClientOpcode.Auth, {
-    usertoken: ""
-});
+// client.send(ClientOpcode.Auth, {
+//     usertoken: ""
+// });
