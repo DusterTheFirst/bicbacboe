@@ -18,7 +18,7 @@ jobs:
     script: yarn lint
   - stage: deploy
     if: branch = master
-    script: >
+    script: |
       ssh-add
       yarn build:client
       rsync -rq --delete -e 'ssh -p 4220' --rsync-path="mkdir -p staging/client && rsync" \
