@@ -21,7 +21,7 @@ jobs:
     script: |
       ssh-add
       yarn build:client
-      rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -ref staging/client && mkdir -p staging/client && rsync" \
+      rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf staging/client && mkdir -p staging/client && rsync" \
       $TRAVIS_BUILD_DIR/client/build/ travis@ssh.dusterthefirst.com:staging/client/
 after_success:
 - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
