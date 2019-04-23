@@ -18,12 +18,12 @@
 import React, { Component } from "react";
 import Media from "react-media";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { CreateMenu } from "./menu/CreateMenu";
-import { JoinMenu } from "./menu/JoinMenu";
-import { ChoiceMenu, DashboardMenu } from "./menu/MenuTypes";
+import { CreateMenu } from "../components/menu/CreateMenu";
+import { JoinMenu } from "../components/menu/JoinMenu";
+import { ChoiceMenu, DashboardMenu } from "../components/menu/MenuTypes";
 
-/** The main menu where the user changes settings and creates or joins games */
-export default class MainMenu extends Component {
+/** The main menu where the user changes settings and creates or joins Lobbies */
+export default class MainMenuView extends Component {
     public render() {
         return (
             <div className="mainmenu">
@@ -41,8 +41,8 @@ export default class MainMenu extends Component {
                 <div className="choice">
                     <Switch>
                         <Route path="/" exact={true} component={ChoiceMenu} />
-                        <Route path="/join/" component={JoinMenu} />
-                        <Route path="/create/" component={CreateMenu} />
+                        <Route path="/join" component={JoinMenu} />
+                        <Route path="/create" component={CreateMenu} />
                     </Switch>
                 </div>
             );
@@ -54,8 +54,8 @@ export default class MainMenu extends Component {
                         <Route path="/" exact={true} component={DashboardMenu} />
 
                         {/* Redirect from mobile urls if given, or if size changes */}
-                        <Redirect from="/join/" to="/" />
-                        <Redirect from="/create/" to="/" />
+                        <Redirect from="/join" to="/" />
+                        <Redirect from="/create" to="/" />
                     </Switch>
                 </div>
             );

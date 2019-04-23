@@ -15,6 +15,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export type FilterObjectKeysByType<O, T> = {
-    [K in keyof O]: O[K] extends T ? K : never;
-}[keyof O];
+import React, { Component } from "react";
+import { Link, Route, RouteComponentProps } from "react-router-dom";
+
+const NoPathMessage = ({location}: RouteComponentProps) => <div>{location.pathname} does not exist</div>;
+
+export default function PageNotFoundView() {
+    return (
+        <div className="404">
+            <div className="header">Page not found</div>
+            <Route render={NoPathMessage}/>
+            <Link to="/">Go back home</Link>
+        </div>
+    );
+}

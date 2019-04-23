@@ -19,7 +19,7 @@ import "normalize.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { HashRouter } from "react-router-dom";
-import App from "./components/App";
+import App from "./App";
 import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
 import welcome from "./welcome.json";

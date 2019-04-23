@@ -8,6 +8,7 @@
     "scripts": {
         "dev:server": "nodemon --config server/nodemon.json",
         "dev:client": "cd client && yarn start",
+        "dev:api": "tsc -b -w api",
         "clean:server": "tsc -b --clean server",
         "clean:api": "tsc -b --clean api",
         "clean": "run-p -snl clean:**",

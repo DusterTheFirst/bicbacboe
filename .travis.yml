@@ -12,17 +12,17 @@ before_install:
 - cat server.pub >> $HOME/.ssh/known_hosts
 jobs:
   include:
-  - stage: build
-    script: yarn build
-  - stage: lint
-    script: yarn lint
-  - stage: deploy
-    if: branch = master
-    script: |
-      ssh-add
-      yarn build:client
-      rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/client && mkdir -p bicbacboe/staging/client && rsync" \
-      $TRAVIS_BUILD_DIR/client/build/ travis@ssh.bicbacboe.com:bicbacboe/staging/client/
+    - stage: build
+      script: yarn build
+    - stage: lint
+      script: yarn lint
+    - stage: deploy
+      if: branch = master
+      script: |
+        ssh-add
+        yarn build:client
+        rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/client && mkdir -p bicbacboe/staging/client && rsync" \
+        $TRAVIS_BUILD_DIR/client/build/ travis@ssh.bicbacboe.com:bicbacboe/staging/client/
 after_success:
 - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
 - chmod +x send.sh

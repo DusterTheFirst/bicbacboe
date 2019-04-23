@@ -16,16 +16,20 @@
  */
 
 import React, { Component } from "react";
-import { HashRouter } from "react-router-dom";
-import { WebsocketClient } from "../api/websocketClient";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import { WebsocketClient } from "./api/websocketClient";
 import "./App.scss";
-import MainMenu from "./MainMenu";
+import MainMenuView from "./views/MainMenuView";
+import PageNotFoundView from "./views/PageNotFoundView";
 
 class App extends Component {
     public render() {
         return (
             <div className="app">
-                <MainMenu />
+                <Switch>
+                    <Route path={["/", "/join", "/create"]} exact={true} component={MainMenuView}/>
+                    <Route component={PageNotFoundView}/>
+                </Switch>
             </div>
         );
     }

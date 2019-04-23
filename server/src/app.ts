@@ -15,8 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// tslint:disable: match-default-export-name
 import express from "express";
 import expressws from "express-ws";
+// tslint:enable: match-default-export-name
 // import {  } from "../api/build/client";
 
 const app = express();

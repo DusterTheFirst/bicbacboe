@@ -35,8 +35,8 @@ export function DashboardMenu() {
 export function ChoiceMenu() {
     return (
         <div className="playoptions">
-            <Link to="/join" className="join">Join Game</Link>
-            <Link to="/create" className="create">Create Game</Link>
+            <Link to="/join" className="join">Join Lobby</Link>
+            <Link to="/create" className="create">Create Lobby</Link>
         </div>
     );
 }
