@@ -1,6 +1,6 @@
-# ssh.dusterthefirst.com:4220 SSH-2.0-OpenSSH_7.4p1 Raspbian-10+deb9u4
-[ssh.dusterthefirst.com]:4220 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHQA9QJYs9d90zHQABq20kVyckWp9IVqURyguA6Qd6Rd/iD/cGJHdjGu5rpLTcWil0dQjR1D1TzqxUElzfhSUXGuGg19uUtoq6UuVhVB8jCEPsCizlf0Dci9eZT+oKWM2m7HNlmcCageWuPM38PaKvPADdYbAM0FSHU5sGUuXemKrbPcMNUXqoyxqVAOSnFMeW+Dzm52ZlKTERUuqLCEbNHOByvHuILYURj2qJFdHmU4DBwi4Cr4e4vINnF3i39vwCGNvw8XKeD7+Ycg+dFRWs4kP7AHcnBpgHHFIaxOGhiBvAjlAkCA8rkVsHKuUVuaHEjQPn7zDVXr5JlB122FTZ
-# ssh.dusterthefirst.com:4220 SSH-2.0-OpenSSH_7.4p1 Raspbian-10+deb9u4
-[ssh.dusterthefirst.com]:4220 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBKsX3+DgYIjZNlTCb3r2dqaJbIoIyWqCpBcgeNFWE+Q7wH9+1DkEuzToI1/6cQGvaPEwf/2jDeDjl7UJkxaFvw4=
-# ssh.dusterthefirst.com:4220 SSH-2.0-OpenSSH_7.4p1 Raspbian-10+deb9u4
-[ssh.dusterthefirst.com]:4220 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFP3y8p/XkB9TmB4L3dfjA8p7j+d53OAfeaWE8AHlwi
+# ssh.bicbacboe.com:4220 SSH-2.0-OpenSSH_7.4p1 Raspbian-10+deb9u4
+[ssh.bicbacboe.com]:4220 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBKsX3+DgYIjZNlTCb3r2dqaJbIoIyWqCpBcgeNFWE+Q7wH9+1DkEuzToI1/6cQGvaPEwf/2jDeDjl7UJkxaFvw4=
+# ssh.bicbacboe.com:4220 SSH-2.0-OpenSSH_7.4p1 Raspbian-10+deb9u4
+[ssh.bicbacboe.com]:4220 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHQA9QJYs9d90zHQABq20kVyckWp9IVqURyguA6Qd6Rd/iD/cGJHdjGu5rpLTcWil0dQjR1D1TzqxUElzfhSUXGuGg19uUtoq6UuVhVB8jCEPsCizlf0Dci9eZT+oKWM2m7HNlmcCageWuPM38PaKvPADdYbAM0FSHU5sGUuXemKrbPcMNUXqoyxqVAOSnFMeW+Dzm52ZlKTERUuqLCEbNHOByvHuILYURj2qJFdHmU4DBwi4Cr4e4vINnF3i39vwCGNvw8XKeD7+Ycg+dFRWs4kP7AHcnBpgHHFIaxOGhiBvAjlAkCA8rkVsHKuUVuaHEjQPn7zDVXr5JlB122FTZ
+# ssh.bicbacboe.com:4220 SSH-2.0-OpenSSH_7.4p1 Raspbian-10+deb9u4
+[ssh.bicbacboe.com]:4220 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFP3y8p/XkB9TmB4L3dfjA8p7j+d53OAfeaWE8AHlwi
