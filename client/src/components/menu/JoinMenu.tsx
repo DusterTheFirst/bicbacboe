@@ -18,7 +18,7 @@
 import React from "react";
 
 /** The section of the menu dedicated to finding and joining a Lobby */
-export function JoinMenu() {
+export default function JoinMenu() {
     return (
         <>
             join

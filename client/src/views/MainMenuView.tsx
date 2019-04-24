@@ -15,50 +15,48 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from "react";
+import React from "react";
 import Media from "react-media";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { CreateMenu } from "../components/menu/CreateMenu";
-import { JoinMenu } from "../components/menu/JoinMenu";
-import { ChoiceMenu, DashboardMenu } from "../components/menu/MenuTypes";
+import CreateMenu from "../components/menu/CreateMenu";
+import JoinMenu from "../components/menu/JoinMenu";
+import { ChoiceMenu, DashboardMenu } from "../components/menu/Menus";
 
 /** The main menu where the user changes settings and creates or joins Lobbies */
-export default class MainMenuView extends Component {
-    public render() {
+export default function MainMenuView() {
+    return (
+        <div className="mainmenu">
+            <h1 className="title">BicBacBoe</h1>
+            <Media query={{ maxWidth: 599 }} children={MenuSwitch} />
+        </div>
+    );
+}
+
+/** Switch the menu shown according to if the device is a mobile device */
+function MenuSwitch(isChoice: boolean) {
+    if (isChoice) {
+        // If mobile, seperate screens into seperate routes
         return (
-            <div className="mainmenu">
-                <h1 className="title">BicBacBoe</h1>
-                <Media query={{ maxWidth: 599 }} children={this.MenuSwitch} />
+            <div className="choice">
+                <Switch>
+                    <Route path="/" exact={true} component={ChoiceMenu} />
+                    <Route path="/join" component={JoinMenu} />
+                    <Route path="/create" component={CreateMenu} />
+                </Switch>
             </div>
         );
-    }
+    } else {
+        // If desktop, show all screens together like a dashboard
+        return (
+            <div className="dashboard">
+                <Switch>
+                    <Route path="/" exact={true} component={DashboardMenu} />
 
-    /** Switch the menu shown according to if the device is a mobile device */
-    private readonly MenuSwitch = (isChoice: boolean) => {
-        if (isChoice) {
-            // If mobile, seperate screens into seperate routes
-            return (
-                <div className="choice">
-                    <Switch>
-                        <Route path="/" exact={true} component={ChoiceMenu} />
-                        <Route path="/join" component={JoinMenu} />
-                        <Route path="/create" component={CreateMenu} />
-                    </Switch>
-                </div>
-            );
-        } else {
-            // If desktop, show all screens together like a dashboard
-            return (
-                <div className="dashboard">
-                    <Switch>
-                        <Route path="/" exact={true} component={DashboardMenu} />
-
-                        {/* Redirect from mobile urls if given, or if size changes */}
-                        <Redirect from="/join" to="/" />
-                        <Redirect from="/create" to="/" />
-                    </Switch>
-                </div>
-            );
-        }
+                    {/* Redirect from mobile urls if given, or if size changes */}
+                    <Redirect from="/join" to="/" />
+                    <Redirect from="/create" to="/" />
+                </Switch>
+            </div>
+        );
     }
 }

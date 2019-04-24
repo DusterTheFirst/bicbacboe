@@ -17,8 +17,8 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { CreateMenu } from "./CreateMenu";
-import { JoinMenu } from "./JoinMenu";
+import CreateMenu from "./CreateMenu";
+import JoinMenu from "./JoinMenu";
 
 /** The dashboard view of the main menu */
 export function DashboardMenu() {

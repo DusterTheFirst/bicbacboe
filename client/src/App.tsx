@@ -15,24 +15,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
-import { WebsocketClient } from "./api/websocketClient";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.scss";
 import MainMenuView from "./views/MainMenuView";
 import PageNotFoundView from "./views/PageNotFoundView";
 
-class App extends Component {
-    public render() {
-        return (
-            <div className="app">
-                <Switch>
-                    <Route path={["/", "/join", "/create"]} exact={true} component={MainMenuView}/>
-                    <Route component={PageNotFoundView}/>
-                </Switch>
-            </div>
-        );
-    }
+export default function App() {
+    return (
+        <div className="app">
+            <Switch>
+                <Route path={["/", "/join", "/create"]} exact={true} component={MainMenuView}/>
+                <Route component={PageNotFoundView}/>
+            </Switch>
+        </div>
+    );
 }
-
-export default App;

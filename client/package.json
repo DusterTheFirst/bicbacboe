@@ -20,7 +20,7 @@
     "react-media": "^1.9.2",
     "react-radio-group": "^3.0.3",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.0.0",
     "tslint-react": "^4.0.0",
     "typescript": "3.4.3"
   },

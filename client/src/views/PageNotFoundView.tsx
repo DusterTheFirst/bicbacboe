@@ -15,16 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from "react";
+import React from "react";
 import { Link, Route, RouteComponentProps } from "react-router-dom";
 
-const NoPathMessage = ({location}: RouteComponentProps) => <div>{location.pathname} does not exist</div>;
+function NoPathMessage({ location }: RouteComponentProps) {
+    return <div>{location.pathname} does not exist</div>;
+}
 
 export default function PageNotFoundView() {
     return (
         <div className="404">
             <div className="header">Page not found</div>
-            <Route render={NoPathMessage}/>
+            <Route render={NoPathMessage} />
             <Link to="/">Go back home</Link>
         </div>
     );
