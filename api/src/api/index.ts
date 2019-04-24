@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { IPOSTRequestMap} from "@bicbacboe/api/src/rest";
-import { ILobby, ILobbySettings } from "@bicbacboe/api/src/rest/lobby";
 import msgpack from "msgpack-lite";
+import { IPOSTRequestMap} from "../protocol/rest";
+import { ILobby, ILobbySettings } from "../protocol/rest/post/lobby";
 
 const APIURL = process.env.NODE_ENV === "development" ? "http://localhost:8080" : `${process.env.PUBLIC_URL}/api`;
 

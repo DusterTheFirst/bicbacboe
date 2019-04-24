@@ -1,7 +1,11 @@
 {
   "name": "@bicbacboe/api",
   "version": "0.0.1",
+  "main": "build/index.js",
   "private": true,
   "author": "DusterTheFirst <dusterthefirst@gmail.com> (Zachary Kohnen)",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "msgpack-lite": "^0.1.26"
+  }
 }

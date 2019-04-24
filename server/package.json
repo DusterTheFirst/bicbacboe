@@ -1,5 +1,5 @@
 {
-  "name": "@bicbacboe/server",
+  "name": "server",
   "version": "0.0.1",
   "main": "build/app.js",
   "author": "DusterTheFirst <dusterthefirst@gmail.com> (Zachary Kohnen)",

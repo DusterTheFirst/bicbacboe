@@ -15,12 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { LobbyType, MatchmakingType } from "@bicbacboe/api/build/rest/lobby";
+import { createLobby, LobbyType, MatchmakingType } from "@bicbacboe/api";
 import React from "react";
 import { Radio, RadioGroup } from "react-radio-group";
 import { Prompt } from "react-router-dom";
 import useLobbySettings from "../../hooks/useLobbySettings";
-import { createLobby } from "../../api";
 
 /** The section of the menu dedicated to creating a lobby */
 export default function CreateMenu() {

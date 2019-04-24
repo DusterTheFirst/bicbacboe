@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { ClientOpcode, IClientErrorMap, IClientPayloadMap } from "@bicbacboe/api/src/ws/client";
-import { IError, IPayload } from "@bicbacboe/api/src/ws/payloads";
-import { IServerErrorMap, IServerPayloadMap, ServerOpcode } from "@bicbacboe/api/src/ws/server";
+import { IError, IPayload } from "../protocol//ws/payloads";
+import { IServerErrorMap, IServerPayloadMap, ServerOpcode } from "../protocol//ws/server";
+import { ClientOpcode, IClientErrorMap, IClientPayloadMap } from "../protocol/ws/client";
 
 /** A websocket client with typings built in aswell as extra helper functions */
 export class WebsocketClient {
