@@ -15,10 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export interface IAuthRequest {
-    userToken: string;
-}
+import { ILobby, ILobbySettings } from "./lobby";
 
-export interface IAuthResponse {
-    success: boolean;
+export interface IPOSTRequestMap {
+    "/lobby": {
+        req: ILobbySettings;
+        res: ILobby;
+    };
 }

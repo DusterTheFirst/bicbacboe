@@ -19,7 +19,7 @@
 import express from "express";
 import expressws from "express-ws";
 // tslint:enable: match-default-export-name
-// import {  } from "../api/build/client";
+// import {  } from "../../api/build/ws";
 
 const app = express();
 const wsapp = expressws(app);
@@ -30,6 +30,10 @@ const wsapp = expressws(app);
 // });
 
 // app.use("/ws", wsRouter);
+
+app.post("/lobby", (req, res) => {
+    res.send("cool");
+});
 
 const port = process.env.PORT === undefined ? 8080 : process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));

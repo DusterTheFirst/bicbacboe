@@ -3,6 +3,10 @@
         "server",
         "api"
     ],
+    "ignore": [
+        "*.test.ts",
+        "build/*"
+    ],
     "exec": "run-s build:server start:server",
     "ext": "ts"
 }

@@ -15,8 +15,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+export interface ILobby {
+    /** The full internal UID to use to identify this lobby */
+    internalUID: string;
+    /** The ID generated to invite players, this is a hashed version of the interal UID */
+    externalUID: string;
+}
+
 /** The Options to create a Lobby */
-export default interface ILobbySettings {
+export interface ILobbySettings {
     /** The name of the Lobby */
     name: string;
     /** The optional passphrase of the lobby */

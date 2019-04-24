@@ -15,11 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { ClientOpcode, IClientErrorMap, IClientPayloadMap } from "@bicbacboe/api/build/ws/client";
-import { IError, IPayload } from "@bicbacboe/api/build/ws/payloads";
-import { IServerErrorMap, IServerPayloadMap, ServerOpcode } from "@bicbacboe/api/build/ws/server";
+import { ClientOpcode, IClientErrorMap, IClientPayloadMap } from "@bicbacboe/api/src/ws/client";
+import { IError, IPayload } from "@bicbacboe/api/src/ws/payloads";
+import { IServerErrorMap, IServerPayloadMap, ServerOpcode } from "@bicbacboe/api/src/ws/server";
 
-/** A websocket client with typings built in aswell as extra helper functions (**WEB ONLY**) */
+/** A websocket client with typings built in aswell as extra helper functions */
 export class WebsocketClient {
 
     /** The underlying websocket that this connection is built on */

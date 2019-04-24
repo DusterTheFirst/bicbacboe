@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import ILobbySettings from "@bicbacboe/api/build/types/lobbySettings";
+import { ILobbySettings } from "@bicbacboe/api/src/rest/lobby";
 import { ChangeEvent, useState } from "react";
 
 type FilterKeys<T, U> = Not<{ [K in keyof T]: T[K] extends U ? K : never }[keyof T], undefined>;

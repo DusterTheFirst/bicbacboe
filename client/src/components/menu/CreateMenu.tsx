@@ -15,11 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { LobbyType, MatchmakingType } from "@bicbacboe/api/build/types/lobbySettings";
+import { LobbyType, MatchmakingType } from "@bicbacboe/api/build/rest/lobby";
 import React from "react";
 import { Radio, RadioGroup } from "react-radio-group";
 import { Prompt } from "react-router-dom";
 import useLobbySettings from "../../hooks/useLobbySettings";
+import { createLobby } from "../../api";
 
 /** The section of the menu dedicated to creating a lobby */
 export default function CreateMenu() {
@@ -92,6 +93,7 @@ export default function CreateMenu() {
                 Enable spectators
                 <input type="checkbox" {... linkCheckbox("spectators")}/>
             </label>
+            <button onClick={async () => console.log(await createLobby(lobbySettings))}>Create</button>
         </div>
     );
 }
