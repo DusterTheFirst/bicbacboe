@@ -27,8 +27,8 @@ import uuid from "uuid/v4";
 import { postHandler } from "./postHandler";
 
 // TODO:
-// HASHIDS for game/lobby codes
-// UUID for User IDs
+// HASHIDS for game/lobby codes (or https://www.npmjs.com/package/shortid)
+// UUID or other long uuids for User IDs and game ids
 
 const hashids = new Hashids("bicbacboeiscool", 6);
 const app = express();
