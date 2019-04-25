@@ -16,7 +16,7 @@
  */
 
 import msgpack from "msgpack-lite";
-import { IPOSTRequestMap} from "../protocol/rest";
+import { IPOSTRequestMap, AcceptedMimeTypes } from "../protocol/rest";
 import { ILobby, ILobbySettings } from "../protocol/rest/post/lobby";
 
 const APIURL = process.env.NODE_ENV === "development" ? "http://localhost:8080" : `${process.env.PUBLIC_URL}/api`;
@@ -29,17 +29,21 @@ async function POST<P extends keyof IPOSTRequestMap, B extends IPOSTRequestMap[P
     let response = await fetch(`${APIURL}${path}`, {
         body: msgpack.encode(body),
         headers: {
-            "Accept": "application/msgpack",
-            "Content-Type": "application/msgpack",
+            "Accept": AcceptedMimeTypes.MessagePack,
+            "Content-Type": AcceptedMimeTypes.MessagePack,
             "User-Agent": "BicBacBoe",
         },
         method: "post",
     });
 
-    if (response.ok) {
-        return response.json() as Promise<R>;
-    } else {
-        throw response.status;
-    }
+    console.log(msgpack.decode(new Uint8Array(await response.arrayBuffer())));
+
+    // if (response.ok) {
+    //     return response.json() as Promise<R>;
+    // } else {
+    //     throw response.status;
+    // }
+
+    return {} as R;
 
 }

@@ -94,7 +94,7 @@ export default function CreateMenu() {
                 Enable spectators
                 <input type="checkbox" {... linkCheckbox("spectators")}/>
             </label>
-            <button onClick={createLobbyFn}>Create</button>
+            <button onClick={createLobbyFn}>Create Lobby</button>
         </div>
     );
 }

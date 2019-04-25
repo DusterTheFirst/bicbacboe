@@ -57,8 +57,14 @@ export function postHandler<K extends keyof IPOSTRequestMap>(handler: IPOSTReque
 
         console.log(data);
 
+        function sendFunction(body: IPOSTRequestMap[K]["res"]) {
+            console.log(body);
+            res.contentType(Accept);
+            res.send(serialize(body, Accept));
+        }
+
         // tslint:disable-next-line: prefer-object-spread
-        handler(Object.assign({}, req, { body: data, _body: req.body }), Object.assign({}, res, { send: (body: IPOSTRequestMap[K]["res"]) => console.log("SENT", body), _send: res.send }), next);
+        handler(Object.assign({}, req, { body: data, _body: req.body }), Object.assign({}, res, { send: sendFunction, _send: res.send }), next);
 
     };
 }
