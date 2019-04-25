@@ -18,10 +18,10 @@
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-media": "^1.9.2",
     "react-radio-group": "^3.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
+    "react-use-media": "^0.3.0",
     "tslint-react": "^4.0.0",
     "typescript": "3.4.3"
   },

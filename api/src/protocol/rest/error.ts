@@ -15,10 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from "./post";
-
-/** The only accepted content types for requests and responses */
-export enum AcceptedMimeTypes {
-    MessagePack = "application/msgpack",
-    JSON = "application/json"
+export interface IError<E, M> {
+    error: E;
+    message: M;
 }

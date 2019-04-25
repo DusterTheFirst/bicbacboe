@@ -25,12 +25,13 @@ export async function createLobby(settings: ILobbySettings): Promise<ILobby> {
     return POST("/lobby", settings);
 }
 
-async function POST<P extends keyof IPOSTRequestMap, B extends IPOSTRequestMap[P]["req"], R extends IPOSTRequestMap[P]["res"]>(path: P, body: B, messagePack = true): Promise<R> {
+async function POST<P extends keyof IPOSTRequestMap, B extends IPOSTRequestMap[P]["req"], R extends IPOSTRequestMap[P]["res"]>(path: P, body: B): Promise<R> {
     let response = await fetch(`${APIURL}${path}`, {
         body: msgpack.encode(body),
         headers: {
+            "Accept": "application/msgpack",
             "Content-Type": "application/msgpack",
-            "User-Agent": "BicBacBoe"
+            "User-Agent": "BicBacBoe",
         },
         method: "post",
     });

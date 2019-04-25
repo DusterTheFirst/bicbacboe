@@ -60,7 +60,7 @@
         "jsdoc-format": true,
         "label-position": true,
         "linebreak-style": false,
-        "match-default-export-name": true,
+        "match-default-export-name": false,
         "max-classes-per-file": true,
         "max-file-line-count": false,
         "max-line-length": false,

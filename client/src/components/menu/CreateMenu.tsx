@@ -30,6 +30,8 @@ export default function CreateMenu() {
         spectators: false
     });
 
+    const createLobbyFn = async () => console.log(await createLobby(lobbySettings));
+
     return (
         <div className="create-menu">
             <Prompt when={isEdited} message="Are you sure you want to leave? You will lose all of the settings for this game" />
@@ -92,7 +94,7 @@ export default function CreateMenu() {
                 Enable spectators
                 <input type="checkbox" {... linkCheckbox("spectators")}/>
             </label>
-            <button onClick={async () => console.log(await createLobby(lobbySettings))}>Create</button>
+            <button onClick={createLobbyFn}>Create</button>
         </div>
     );
 }

@@ -16,8 +16,8 @@
  */
 
 import React from "react";
-import Media from "react-media";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { useMedia } from "react-use-media";
 import CreateMenu from "../components/menu/CreateMenu";
 import JoinMenu from "../components/menu/JoinMenu";
 import { ChoiceMenu, DashboardMenu } from "../components/menu/Menus";
@@ -27,14 +27,14 @@ export default function MainMenuView() {
     return (
         <div className="mainmenu">
             <h1 className="title">BicBacBoe</h1>
-            <Media query={{ maxWidth: 599 }} children={MenuSwitch} />
+            <Menu/>
         </div>
     );
 }
 
 /** Switch the menu shown according to if the device is a mobile device */
-function MenuSwitch(isChoice: boolean) {
-    if (isChoice) {
+function Menu() {
+    if (useMedia({ maxWidth: 599 })) {
         // If mobile, seperate screens into seperate routes
         return (
             <div className="choice">

@@ -15,14 +15,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// tslint:disable: match-default-export-name
+import { AcceptedMimeTypes } from "@bicbacboe/api";
+import bodyParser from "body-parser";
+import compression from "compression";
+import cors from "cors";
 import express from "express";
 import expressws from "express-ws";
-// tslint:enable: match-default-export-name
-// import {  } from "../../api/build/ws";
+import Hashids from "hashids";
+import helmet from "helmet";
+import uuid from "uuid/v5";
+import { postHandler } from "./postHandler";
 
+const hashids = new Hashids("bicbacboeiscool", 6);
 const app = express();
 const wsapp = expressws(app);
+
+app.use(helmet());
+app.use(cors());
+app.use(compression());
+app.use(bodyParser.raw({
+    type: AcceptedMimeTypes.MessagePack
+}));
+app.use(bodyParser.text({
+    type: AcceptedMimeTypes.JSON
+}));
 
 // const wsRouter = express.Router();
 // wsRouter.ws("/game-listing", (ws, req) => {
@@ -31,9 +47,14 @@ const wsapp = expressws(app);
 
 // app.use("/ws", wsRouter);
 
-app.post("/lobby", (req, res) => {
-    res.send("cool");
-});
+app.post("/lobby", postHandler((req, res) => {
+    let id = uuid("bicbacboe.com", uuid.DNS);
+    let i = 1;
+    res.send({
+        externalUID: id,
+        internalUID: hashids.encode(1)
+    });
+}));
 
 const port = process.env.PORT === undefined ? 8080 : process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));
