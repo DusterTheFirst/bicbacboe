@@ -16,7 +16,7 @@
         "force-clean": "rimraf {client,server,api}/build",
         "build:api": "tsc -b api",
         "build:client": "yarn build:api && cd client && yarn build",
-        "build:server": "tsc -b server",
+        "build:server": "yarn build:api && tsc -b server",
         "build": "run-s -snl build:**",
         "start:server": "node server",
         "lint:server": "tslint -p server/tsconfig.json",
