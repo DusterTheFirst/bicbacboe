@@ -14,6 +14,7 @@
     "@types/helmet": "^0.0.43",
     "@types/uuid": "^3.4.4",
     "body-parser": "^1.18.3",
+    "bundle-dependencies": "^1.0.2",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.16.4",
@@ -22,5 +23,28 @@
     "helmet": "^3.16.0",
     "msgpack-lite": "^0.1.26",
     "uuid": "^3.3.2"
-  }
+  },
+  "scripts": {
+    "updatedeps": "bundle-dependencies update"
+  },
+  "bundledDependencies": [
+    "@bicbacboe/api",
+    "@types/compression",
+    "@types/cors",
+    "@types/express",
+    "@types/express-ws",
+    "@types/hashids",
+    "@types/helmet",
+    "@types/uuid",
+    "body-parser",
+    "bundle-dependencies",
+    "compression",
+    "cors",
+    "express",
+    "express-ws",
+    "hashids",
+    "helmet",
+    "msgpack-lite",
+    "uuid"
+  ]
 }
