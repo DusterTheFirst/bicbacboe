@@ -15,22 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { createLobby, LobbyType, MatchmakingType } from "@bicbacboe/api";
-import React from "react";
+import { createLobby, ILobby, LobbyType, MatchmakingType} from "@bicbacboe/api";
+import React, { useState } from "react";
 import { Radio, RadioGroup } from "react-radio-group";
 import { Prompt } from "react-router-dom";
 import useLobbySettings from "../../hooks/useLobbySettings";
 
 /** The section of the menu dedicated to creating a lobby */
 export default function CreateMenu() {
-    let { isEdited, lobbySettings, linkCheckbox, linkInput, linkRadio} = useLobbySettings({
+    let { isEdited, lobbySettings, linkCheckbox, linkInput, linkRadio } = useLobbySettings({
         lobbyType: LobbyType.OneOnOne,
         name: "",
         passphrase: "",
         spectators: false
     });
+    let [lobbyResponse, setLobbyResponse] = useState<ILobby | undefined>(undefined);
 
-    const createLobbyFn = async () => console.log(await createLobby(lobbySettings));
+    const createLobbyFn = async () => setLobbyResponse(await createLobby(lobbySettings));
 
     return (
         <div className="create-menu">
@@ -38,13 +39,13 @@ export default function CreateMenu() {
             <div className="header">Create a Lobby</div>
             <label>
                 Lobby Name
-                <input type="text" placeholder="Bob's Lobby" {... linkInput("name")} />
+                <input type="text" placeholder="Bob's Lobby" {...linkInput("name")} />
             </label>
             <label>
                 Lobby Passphrase (Optional)
-                <input type="text" placeholder="Bob is cool" {... linkInput("passphrase")} />
+                <input type="text" placeholder="Bob is cool" {...linkInput("passphrase")} />
             </label>
-            <RadioGroup {... linkRadio("lobbyType")}>
+            <RadioGroup {...linkRadio("lobbyType")}>
                 Lobby Type
                 <label>
                     <Radio value={LobbyType.OneOnOne} />
@@ -59,7 +60,7 @@ export default function CreateMenu() {
                     Teams
                 </label>
             </RadioGroup>
-            <RadioGroup {... linkRadio("matchmakingType")} hidden={lobbySettings.lobbyType === LobbyType.OneOnOne}>
+            <RadioGroup {...linkRadio("matchmakingType")} hidden={lobbySettings.lobbyType === LobbyType.OneOnOne}>
                 Matchmaking Type
                 <label>
                     <Radio value={MatchmakingType.SingleElimination} disabled={true} />
@@ -92,9 +93,10 @@ export default function CreateMenu() {
             </RadioGroup>
             <label>
                 Enable spectators
-                <input type="checkbox" {... linkCheckbox("spectators")}/>
+                <input type="checkbox" {...linkCheckbox("spectators")} />
             </label>
             <button onClick={createLobbyFn}>Create Lobby</button>
+            <pre>{JSON.stringify(lobbyResponse, undefined, 4)}</pre>
         </div>
     );
 }

@@ -16,7 +16,7 @@
  */
 
 import msgpack from "msgpack-lite";
-import { IPOSTRequestMap, AcceptedMimeTypes } from "../protocol/rest";
+import { AcceptedMimeTypes, IPOSTRequestMap } from "../protocol/rest";
 import { ILobby, ILobbySettings } from "../protocol/rest/post/lobby";
 
 const APIURL = process.env.NODE_ENV === "development" ? "http://localhost:8080" : `${process.env.PUBLIC_URL}/api`;
@@ -36,14 +36,10 @@ async function POST<P extends keyof IPOSTRequestMap, B extends IPOSTRequestMap[P
         method: "post",
     });
 
-    console.log(msgpack.decode(new Uint8Array(await response.arrayBuffer())));
-
-    // if (response.ok) {
-    //     return response.json() as Promise<R>;
-    // } else {
-    //     throw response.status;
-    // }
-
-    return {} as R;
-
+    if (response.ok) {
+        return msgpack.decode(new Uint8Array(await response.arrayBuffer())) as R;
+    } else {
+        // FIXME:
+        throw response.status;
+    }
 }

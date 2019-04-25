@@ -23,8 +23,12 @@ import express from "express";
 import expressws from "express-ws";
 import Hashids from "hashids";
 import helmet from "helmet";
-import uuid from "uuid/v5";
+import uuid from "uuid/v4";
 import { postHandler } from "./postHandler";
+
+// TODO:
+// HASHIDS for game/lobby codes
+// UUID for User IDs
 
 const hashids = new Hashids("bicbacboeiscool", 6);
 const app = express();
@@ -47,13 +51,15 @@ app.use(bodyParser.text({
 
 // app.use("/ws", wsRouter);
 
+let i = 0;
 app.post("/lobby", postHandler((req, res) => {
-    let id = uuid("bicbacboe.com", uuid.DNS);
-    let i = 1;
+    let id = uuid();
     res.send({
         externalUID: id,
-        internalUID: hashids.encode(1)
+        internalUID: hashids.encode(i)
     });
+
+    i++;
 }));
 
 const port = process.env.PORT === undefined ? 8080 : process.env.PORT;
