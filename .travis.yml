@@ -1,7 +1,7 @@
 sudo: true
 language: node_js
 node_js:
-  - '11'
+  - '12'
 cache: yarn
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
@@ -18,10 +18,15 @@ jobs:
       script: yarn lint
     - stage: deploy
       if: branch = master
+      name: Deploy Client
       script:
-        - ssh-add
         - yarn build:client
         - rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/client && mkdir -p bicbacboe/staging/client && rsync" $TRAVIS_BUILD_DIR/client/build/ travis@ssh.bicbacboe.com:bicbacboe/staging/client/
+    - if: branch = master
+      name: Deploy Server
+      script:
+        - yarn build:server
+        - rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/server && mkdir -p bicbacboe/staging/server && rsync" $TRAVIS_BUILD_DIR/server/ travis@ssh.bicbacboe.com:bicbacboe/staging/server/
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
