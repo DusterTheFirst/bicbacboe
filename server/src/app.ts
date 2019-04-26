@@ -66,3 +66,14 @@ const port = process.env.PORT === undefined ? 8080 : process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // console.log(ClientErrorCode);
+
+process.once("SIGTERM", (signal) => {
+    // TODO: Graceful shutdown and close connections
+    console.log(signal);
+});
+
+process.once("SIGINT", (signal) => {
+    // TODO:
+    console.log(signal);
+    process.exit(128);
+});

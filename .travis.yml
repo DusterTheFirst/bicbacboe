@@ -26,7 +26,7 @@ jobs:
       name: Deploy Server
       script:
         - yarn build:server
-        - rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/server && mkdir -p bicbacboe/staging/server && rsync" $TRAVIS_BUILD_DIR/server/ travis@ssh.bicbacboe.com:bicbacboe/staging/server/
+        - rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/server && mkdir -p bicbacboe/staging/server && rsync" $TRAVIS_BUILD_DIR/server/build/ travis@ssh.bicbacboe.com:bicbacboe/staging/server/
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
