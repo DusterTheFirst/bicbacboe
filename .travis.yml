@@ -24,9 +24,9 @@ jobs:
         # Build the project
         - yarn run build
         # Upload the client build files
-        - rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/client && mkdir -p bicbacboe/staging/client && rsync" $TRAVIS_BUILD_DIR/client/build/ travis@ssh.bicbacboe.com:bicbacboe/staging/client/
+        - .travis/deploy.sh client
         # Upload the sever built files
-        - rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/server && mkdir -p bicbacboe/staging/server && rsync" $TRAVIS_BUILD_DIR/server/build/ travis@ssh.bicbacboe.com:bicbacboe/staging/server/
+        - .travis/deploy.sh server
 # after_success:
 #   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
 #   - chmod +x send.sh
