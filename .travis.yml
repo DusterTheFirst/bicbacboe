@@ -23,6 +23,8 @@ jobs:
       script:
         # Build the project
         - yarn run build
+        # Add execute flag to deploy script
+        - chmod +x .travis/deploy.sh
         # Upload the client build files
         - .travis/deploy.sh client
         # Upload the sever built files
