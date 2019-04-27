@@ -12,10 +12,7 @@
     "dev:client": "cd client && yarn start",
     "dev:api": "tsc -b -w api",
     "dev": "run-p -snl dev:**",
-    "clean:server": "tsc -b --clean server",
-    "clean:api": "tsc -b --clean api",
-    "clean": "run-p -snl clean:**",
-    "force-clean": "rimraf {client,server,api}/build",
+    "clean": "rimraf {client,server,api}/build",
     "build:api": "tsc -b api",
     "build:client": "cd client && yarn build",
     "build:server": "cd server && webpack",
@@ -24,7 +21,11 @@
     "lint:server": "tslint -p server/tsconfig.json",
     "lint:api": "tslint -p api/tsconfig.json",
     "lint:client": "tslint -p client/tsconfig.json",
-    "lint": "run-s -csnl build:api lint:**"
+    "lint": "run-s -csnl build:api lint:**",
+    "check:api": "tsc --noEmit --project api",
+    "check:server": "tsc --noEmit --project server",
+    "check:client": "tsc --noEmit --project client",
+    "check": "run-s -snl build:api check:**"
   },
   "devDependencies": {
     "nodemon": "^1.18.11",
