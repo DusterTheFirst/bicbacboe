@@ -27,11 +27,11 @@ jobs:
         - rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/client && mkdir -p bicbacboe/staging/client && rsync" $TRAVIS_BUILD_DIR/client/build/ travis@ssh.bicbacboe.com:bicbacboe/staging/client/
         # Upload the sever built files
         - rsync -rq --delete -e 'ssh -p 4220' --rsync-path="rm -rf bicbacboe/staging/server && mkdir -p bicbacboe/staging/server && rsync" $TRAVIS_BUILD_DIR/server/build/ travis@ssh.bicbacboe.com:bicbacboe/staging/server/
-after_success:
-  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
-  - chmod +x send.sh
-  - "./send.sh success $WEBHOOK_URL"
-after_failure:
-  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
-  - chmod +x send.sh
-  - "./send.sh failure $WEBHOOK_URL"
+# after_success:
+#   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+#   - chmod +x send.sh
+#   - "./send.sh success $WEBHOOK_URL"
+# after_failure:
+#   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+#   - chmod +x send.sh
+#   - "./send.sh failure $WEBHOOK_URL"
