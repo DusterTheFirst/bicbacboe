@@ -10,25 +10,21 @@ before_install:
   - chmod 600 .travis/travis_rsa
   - mv .travis/travis_rsa ~/.ssh/id_rsa
   - cat .travis/server.pub >> $HOME/.ssh/known_hosts
+  # Add execute flag to deploy script
+  - chmod +x .travis/deploy.sh
 jobs:
   include:
-    - stage: typecheck
+    - stage: build
       script: yarn run check
     # - stage: test
     #   script: yarn test
     - stage: lint
       script: yarn run lint
-    - stage: Build & Deploy
-      if: branch = master
-      script:
-        # Build the project
-        - yarn run build
-        # Add execute flag to deploy script
-        - chmod +x .travis/deploy.sh
-        # Upload the client build files
-        - .travis/deploy.sh client
-        # Upload the sever built files
-        - .travis/deploy.sh server
+    - deploy:
+        provider: script
+        on:
+          branch: master
+        script: .travis/deploy.sh staging
 # after_success:
 #   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
 #   - chmod +x send.sh
