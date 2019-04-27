@@ -13,10 +13,6 @@ if [ $# = 0 ] || ([ $1 != "staging" ] && [ $1 != "stable" ]); then
     exit 1
 fi
 
-echo "Building"
-yarn run build
-echo "Completed build"
-
 deployDirectory $1 client
 deployDirectory $1 server
 
