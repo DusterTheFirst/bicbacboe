@@ -8,10 +8,10 @@
   "scripts": {
     "dev:server:webpack": "cd server && webpack --mode development --watch",
     "dev:server:nodemon": "cd server && nodemon build/bundle.js",
-    "dev:server": "run-p -snl dev:server:**",
+    "dev:server": "run-p -sn dev:server:**",
     "dev:client": "cd client && yarn start",
     "dev:api": "tsc -b -w api",
-    "dev": "run-p -snl dev:**",
+    "dev": "run-p -snl dev:*",
     "clean": "rimraf {client,server,api}/build",
     "build:api": "tsc -b api",
     "build:client": "cd client && yarn build",
