@@ -16,10 +16,8 @@
  */
 
 export interface ILobby {
-    /** The full internal UID to use to identify this lobby */
-    internalUID: string;
-    /** The ID generated to invite players, this is a hashed version of the interal UID */
-    externalUID: string;
+    /** The lobby ID */
+    id: string;
 }
 
 /** The Options to create a Lobby */

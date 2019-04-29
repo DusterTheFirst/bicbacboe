@@ -44,27 +44,30 @@ type IPOSTRequestHandler<K extends keyof IPOSTRequestMap> = (req: IPOSTRequestHa
 /** Wrapper for a POST handler that provides typings aswell as replaces the send function for ease of use */
 export function postHandler<K extends keyof IPOSTRequestMap>(handler: IPOSTRequestHandler<K>): RequestHandler {
     return (req: Request, res, next) => {
-        console.log(req.body);
-
         // Parse mime type, by default set as JSON
         let ContentType = parseMimeType(req.header("Content-Type"), AcceptedMimeTypes.JSON);
         // Parse Accept header, by default set as JSON
         let Accept = parseMimeType(req.header("Accept"), AcceptedMimeTypes.JSON);
 
-        console.log(ContentType, Accept);
+        // console.log(`Content-Type: ${ContentType}, Accept: ${Accept}`);
 
         let data = deserialize<IPOSTRequestMap[K]["req"]>(req.body, ContentType);
 
-        console.log(data);
-
-        function sendFunction(body: IPOSTRequestMap[K]["res"]) {
-            console.log(body);
-            res.contentType(Accept);
-            res.send(serialize(body, Accept));
-        }
-
-        // tslint:disable-next-line: prefer-object-spread
-        handler(Object.assign({}, req, { body: data, _body: req.body }), Object.assign({}, res, { send: sendFunction, _send: res.send }), next);
+        // tslint:disable: prefer-object-spread
+        handler(
+            Object.assign({}, req, {
+                _body: req.body,
+                body: data
+            }),
+            Object.assign({}, res, {
+                _send: res.send,
+                send: (body: IPOSTRequestMap[K]["res"]) => {
+                    res.contentType(Accept);
+                    res.send(serialize(body, Accept));
+                }
+            }),
+            next);
+        // tslint:enable: prefer-object-spread
 
     };
 }

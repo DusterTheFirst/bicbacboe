@@ -21,16 +21,11 @@ import compression from "compression";
 import cors from "cors";
 import express from "express";
 import expressws from "express-ws";
-import Hashids from "hashids";
 import helmet from "helmet";
 import uuid from "uuid/v4";
+import { generateLobbyID } from "./id";
 import { postHandler } from "./postHandler";
 
-// TODO:
-// HASHIDS for game/lobby codes (or https://www.npmjs.com/package/shortid)
-// UUID or other long uuids for User IDs and game ids
-
-const hashids = new Hashids("bicbacboeiscool", 6);
 const app = express();
 const wsapp = expressws(app);
 
@@ -54,9 +49,10 @@ app.use(bodyParser.text({
 let i = 0;
 app.post("/lobby", postHandler((req, res) => {
     let id = uuid();
+    console.log(req.body);
     res.send({
         externalUID: id,
-        internalUID: hashids.encode(i)
+        internalUID: generateLobbyID()
     });
 
     i++;
