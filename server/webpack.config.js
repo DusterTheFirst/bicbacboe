@@ -9,9 +9,11 @@ module.exports = (env, argv) => ({
         filename: "bundle.js"
     },
     devtool: "inline-source-map",
-    externals: argv.mode === 'development' ? [nodeExternals({
-        modulesDir: "../node_modules"
-    })] : [],
+    externals: [
+        argv.mode === 'development' ? nodeExternals({
+            modulesDir: "../node_modules"
+        }) : false
+    ].filter(Boolean),
     module: {
         rules: [
             {
