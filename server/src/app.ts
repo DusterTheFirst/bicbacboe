@@ -48,11 +48,9 @@ app.use(bodyParser.text({
 
 let i = 0;
 app.post("/lobby", postHandler((req, res) => {
-    let id = uuid();
     console.log(req.body);
     res.send({
-        externalUID: id,
-        internalUID: generateLobbyID()
+        id: generateLobbyID()
     });
 
     i++;
