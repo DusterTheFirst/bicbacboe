@@ -15,13 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from "./post";
-export * from "./get";
-export * from "./datas/lobby";
-export * from "./datas/login";
+import { getLobby, ILobby } from "@bicbacboe/api";
+import React, { useEffect, useState } from "react";
+import useRouter from "use-react-router";
 
-/** The only accepted content types for requests and responses */
-export enum AcceptedMimeTypes {
-    MessagePack = "application/msgpack",
-    JSON = "application/json"
+export function Lobby() {
+    let { match } = useRouter();
+    let lobby = useLobby("0");
+
+    return (
+        <div className="lobby">
+            <pre>{JSON.stringify(match, undefined, 4)}</pre>
+            <pre>{JSON.stringify(lobby, undefined, 4)}</pre>
+            Lobby
+        </div>
+    );
+}
+
+function useLobby(id: string): undefined | ILobby {
+    let [lobby, setLobby] = useState<ILobby>();
+
+    useEffect(() => {
+        getLobby(id).then(setLobby);
+    }, [id]);
+
+    return lobby;
 }

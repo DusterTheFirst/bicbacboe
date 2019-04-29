@@ -18,6 +18,10 @@
 export interface ILobby {
     /** The lobby ID */
     id: string;
+    /** The lobby settings */
+    settings: ILobbySettings;
+    /** The websocket to subscribe to the lobby */
+    websocket: string;
 }
 
 /** The Options to create a Lobby */

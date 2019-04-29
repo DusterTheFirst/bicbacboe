@@ -16,13 +16,21 @@
  */
 
 import msgpack from "msgpack-lite";
-import { AcceptedMimeTypes, IPOSTRequestMap } from "../protocol/rest";
-import { ILobby, ILobbySettings } from "../protocol/rest/post/lobby";
+import { AcceptedMimeTypes, IAccount, IGETRequestMap, IPOSTRequestMap } from "../protocol/rest";
+import { ILobby, ILobbySettings } from "../protocol/rest/datas/lobby";
 
 const APIURL = process.env.NODE_ENV === "development" ? "http://localhost:8080" : `${process.env.PUBLIC_URL}/api`;
 
-export async function createLobby(settings: ILobbySettings): Promise<ILobby> {
+export async function createLobby(settings: ILobbySettings) {
     return POST("/lobby", settings);
+}
+
+export async function login() {
+    return GET("/login");
+}
+
+export async function getLobby(id: string) {
+    return GET(`/lobby/${id}` as "/lobby/:id");
 }
 
 async function POST<P extends keyof IPOSTRequestMap, B extends IPOSTRequestMap[P]["req"], R extends IPOSTRequestMap[P]["res"]>(path: P, body: B): Promise<R> {
@@ -34,6 +42,23 @@ async function POST<P extends keyof IPOSTRequestMap, B extends IPOSTRequestMap[P
             "User-Agent": "BicBacBoe",
         },
         method: "post",
+    });
+
+    if (response.ok) {
+        return msgpack.decode(new Uint8Array(await response.arrayBuffer())) as R;
+    } else {
+        // FIXME:
+        throw response.status;
+    }
+}
+
+async function GET<P extends keyof IGETRequestMap, R extends IGETRequestMap[P]>(path: P): Promise<R> {
+    let response = await fetch(`${APIURL}${path}`, {
+        headers: {
+            "Accept": AcceptedMimeTypes.MessagePack,
+            "User-Agent": "BicBacBoe",
+        },
+        method: "get",
     });
 
     if (response.ok) {

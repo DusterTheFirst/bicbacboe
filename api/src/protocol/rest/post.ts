@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { ILobby, ILobbySettings } from "./post/lobby";
+import { ILobby, ILobbySettings } from "./datas/lobby";
 
 export interface IPOSTRequestMap {
     "/lobby": {
@@ -23,5 +23,3 @@ export interface IPOSTRequestMap {
         res: ILobby;
     };
 }
-
-export * from "./post/lobby";

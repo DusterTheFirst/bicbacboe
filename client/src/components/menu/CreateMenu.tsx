@@ -15,10 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { createLobby, ILobby, LobbyType, MatchmakingType} from "@bicbacboe/api";
-import React, { useState } from "react";
+import { createLobby, LobbyType, MatchmakingType } from "@bicbacboe/api";
+import React from "react";
 import { Radio, RadioGroup } from "react-radio-group";
 import { Prompt } from "react-router-dom";
+import useRouter from "use-react-router";
 import useLobbySettings from "../../hooks/useLobbySettings";
 
 /** The section of the menu dedicated to creating a lobby */
@@ -29,9 +30,12 @@ export default function CreateMenu() {
         passphrase: "",
         spectators: false
     });
-    let [lobbyResponse, setLobbyResponse] = useState<ILobby | undefined>(undefined);
+    let { history } = useRouter();
 
-    const createLobbyFn = async () => setLobbyResponse(await createLobby(lobbySettings));
+    const createLobbyFn = async () => {
+        let lobby = await createLobby(lobbySettings);
+        history.push(`/lobby/${lobby.id}`);
+    };
 
     return (
         <div className="create-menu">
@@ -39,11 +43,11 @@ export default function CreateMenu() {
             <div className="header">Create a Lobby</div>
             <label>
                 Lobby Name
-                <input type="text" placeholder="Bob's Lobby" {...linkInput("name")} />
+                <input type="text" {...linkInput("name")} />
             </label>
             <label>
                 Lobby Passphrase (Optional)
-                <input type="text" placeholder="Bob is cool" {...linkInput("passphrase")} />
+                <input type="text" {...linkInput("passphrase")} />
             </label>
             <RadioGroup {...linkRadio("lobbyType")}>
                 Lobby Type
@@ -96,7 +100,6 @@ export default function CreateMenu() {
                 <input type="checkbox" {...linkCheckbox("spectators")} />
             </label>
             <button onClick={createLobbyFn}>Create Lobby</button>
-            <pre>{JSON.stringify(lobbyResponse, undefined, 4)}</pre>
         </div>
     );
 }

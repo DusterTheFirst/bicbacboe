@@ -15,13 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from "./post";
-export * from "./get";
-export * from "./datas/lobby";
-export * from "./datas/login";
+import { ILobby } from "./datas/lobby";
+import { IAccount } from "./datas/login";
 
-/** The only accepted content types for requests and responses */
-export enum AcceptedMimeTypes {
-    MessagePack = "application/msgpack",
-    JSON = "application/json"
+export interface IGETRequestMap {
+    "/login": IAccount;
+    "/lobby/:id": ILobby;
 }

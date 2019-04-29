@@ -15,19 +15,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from "react";
+import { IAccount, login } from "@bicbacboe/api";
+import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.scss";
+import { Lobby } from "./views/LobbyView";
 import MainMenuView from "./views/MainMenuView";
 import PageNotFoundView from "./views/PageNotFoundView";
 
+type StateContext<T> = [T, Dispatch<SetStateAction<T>>];
+
+export const AccountContext = createContext<StateContext<IAccount | undefined>>([undefined, () => void 0]);
+
 export default function App() {
+    let [account, setAccount] = useState<IAccount>();
+
+    useEffect(() => {
+        login().then(setAccount);
+    }, []);
+
     return (
         <div className="app">
-            <Switch>
-                <Route path={["/", "/join", "/create"]} exact={true} component={MainMenuView}/>
-                <Route component={PageNotFoundView}/>
-            </Switch>
+            <AccountContext.Provider value={[account, setAccount]}>
+                <pre>{JSON.stringify(account, undefined, 4)}</pre>
+                <Switch>
+                    <Route path="/lobby/:lobbyID" component={Lobby}/>
+                    <Route path={["/", "/join", "/create"]} exact={true} component={MainMenuView} />
+                    <Route component={PageNotFoundView} />
+                </Switch>
+            </AccountContext.Provider>
         </div>
     );
 }

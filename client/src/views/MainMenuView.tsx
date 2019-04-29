@@ -34,6 +34,7 @@ export default function MainMenuView() {
 
 /** Switch the menu shown according to if the device is a mobile device */
 function Menu() {
+
     if (useMedia({ maxWidth: 599 })) {
         // If mobile, seperate screens into seperate routes
         return (

@@ -24,12 +24,12 @@ type Not<T, U> = T extends U ? never : T;
 /** A hook to edit a lobbies settings with added helpers for editing the settings */
 export interface ILobbySettingsHook {
     /** Helper function to simplify linking the form value in the state to a checkbox element by returning the needed attributes */
-    linkCheckbox<K extends FilterKeys<ILobbySettings, boolean>>(key: K): {
+    linkCheckbox<K extends FilterKeys<ILobbySettings, boolean | undefined>>(key: K): {
         onChange(e: ChangeEvent<HTMLInputElement>): void;
         checked: ILobbySettings[K];
     };
     /** Helper function to simplify linking the form value in the state to an input element by returning the needed attributes */
-    linkInput<K extends FilterKeys<ILobbySettings, string>>(key: K): {
+    linkInput<K extends FilterKeys<ILobbySettings, string | undefined>>(key: K): {
         onChange(e: ChangeEvent<HTMLInputElement>): void;
         value: ILobbySettings[K];
     };

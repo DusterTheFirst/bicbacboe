@@ -22,8 +22,8 @@ import cors from "cors";
 import express from "express";
 import expressws from "express-ws";
 import helmet from "helmet";
-import uuid from "uuid/v4";
-import { generateLobbyID } from "./id";
+import { getHandler } from "./getHandler";
+import { generateLobbyID, generateUserID } from "./id";
 import { postHandler } from "./postHandler";
 
 const app = express();
@@ -46,14 +46,20 @@ app.use(bodyParser.text({
 
 // app.use("/ws", wsRouter);
 
-let i = 0;
 app.post("/lobby", postHandler((req, res) => {
     console.log(req.body);
+    let lobbyID = generateLobbyID();
     res.send({
-        id: generateLobbyID()
+        id: lobbyID,
+        settings: req.body,
+        websocket: `/ws/lobby/${lobbyID}`
     });
+}));
 
-    i++;
+app.get("/login", getHandler((req, res) => {
+    res.send({
+        id: generateUserID()
+    });
 }));
 
 const port = process.env.PORT === undefined ? 8080 : process.env.PORT;
@@ -61,13 +67,14 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // console.log(ClientErrorCode);
 
-process.once("SIGTERM", (signal) => {
-    // TODO: Graceful shutdown and close connections
-    console.log(signal);
-});
+// TODO: LISTEM
+// process.once("SIGTERM", (signal) => {
+//     // TODO: Graceful shutdown and close connections
+//     console.log(signal);
+// });
 
-process.once("SIGINT", (signal) => {
-    // TODO:
-    console.log(signal);
-    process.exit(128);
-});
+// process.once("SIGINT", (signal) => {
+//     // TODO:
+//     console.log(signal);
+//     process.exit(128);
+// });

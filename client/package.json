@@ -23,7 +23,8 @@
     "react-scripts": "3.0.0",
     "react-use-media": "^0.3.0",
     "tslint-react": "^4.0.0",
-    "typescript": "3.4.3"
+    "typescript": "3.4.3",
+    "use-react-router": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",

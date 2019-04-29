@@ -15,60 +15,41 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { AcceptedMimeTypes, IPOSTRequestMap } from "@bicbacboe/api";
+import { AcceptedMimeTypes, IGETRequestMap } from "@bicbacboe/api";
 import { NextFunction, Request, RequestHandler, Response, Send } from "express";
 import messagepack from "msgpack-lite";
 
-/** An adapted and typed POST request */
-interface IPOSTRequestHandlerRequest<K extends keyof IPOSTRequestMap> extends Request{
-    /** The body sent */
-    body: IPOSTRequestMap[K]["req"];
-    /** The unparsed body */
-    // tslint:disable-next-line: no-any
-    _body: any;
-}
-
-/** An adapted and typed POST request response */
-interface IPOSTRequestHandlerResponse<K extends keyof IPOSTRequestMap> extends Response {
+/** An adapted and typed GET request response */
+interface IGETRequestHandlerResponse<K extends keyof IGETRequestMap> extends Response {
     /** Function to send a response back to the client */
-    send(body: IPOSTRequestMap[K]["res"]): Response;
+    send(body: IGETRequestMap[K]): Response;
     /** Function to send an error back to the client */
     // TODO: error(body: IPOSTRequestMap[K]["res"]): Response;
     /** The express provided send() fn */
     _send: Send;
 }
 
-/** An adapted and typed POST request handler */
-type IPOSTRequestHandler<K extends keyof IPOSTRequestMap> = (req: IPOSTRequestHandlerRequest<K>, res: IPOSTRequestHandlerResponse<K>, next: NextFunction) => void;
+/** An adapted and typed GET request handler */
+type IGETRequestHandler<K extends keyof IGETRequestMap> = (req: Request, res: IGETRequestHandlerResponse<K>, next: NextFunction) => void;
 
-/** Wrapper for a POST handler that provides typings aswell as replaces the send function for ease of use */
-export function postHandler<K extends keyof IPOSTRequestMap>(handler: IPOSTRequestHandler<K>): RequestHandler {
+/** Wrapper for a GET handler that provides typings aswell as replaces the send function for ease of use */
+export function getHandler<K extends keyof IGETRequestMap>(handler: IGETRequestHandler<K>): RequestHandler {
     return (req, res, next) => {
-        // Parse mime type, by default set as JSON
-        let ContentType = parseMimeType(req.header("Content-Type"), AcceptedMimeTypes.JSON);
-        // Parse Accept header, by default set as JSON
+         // Parse Accept header, by default set as JSON
         let Accept = parseMimeType(req.header("Accept"), AcceptedMimeTypes.JSON);
-
-        // console.log(`Content-Type: ${ContentType}, Accept: ${Accept}`);
-
-        let data = deserialize<IPOSTRequestMap[K]["req"]>(req.body, ContentType);
 
         // tslint:disable: prefer-object-spread
         handler(
-            Object.assign({}, req, {
-                _body: req.body,
-                body: data
-            }),
+            req,
             Object.assign({}, res, {
                 _send: res.send,
-                send: (body: IPOSTRequestMap[K]["res"]) => {
+                send: (body: IGETRequestMap[K]) => {
                     res.contentType(Accept);
                     res.send(serialize(body, Accept));
                 }
             }),
             next);
         // tslint:enable: prefer-object-spread
-
     };
 }
 
