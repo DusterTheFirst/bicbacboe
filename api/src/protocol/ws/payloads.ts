@@ -15,12 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export interface IPayload<O, D> {
+export interface IWebsocketPayload<O, D> {
     opcode: O;
     data: D;
 }
 
-export interface IError<E, M> {
+export interface IWebsocketError<E, M> {
     error: E;
     message: M;
 }

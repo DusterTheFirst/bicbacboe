@@ -15,8 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { ILobby } from "./datas/lobby";
-import { IAccount } from "./datas/login";
+import { ILobby } from "./data/lobby";
+import { IAccount } from "./data/login";
 
 export interface IGETRequestMap {
     "/login": IAccount;

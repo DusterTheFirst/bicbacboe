@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { ILobby, ILobbySettings } from "./datas/lobby";
+import { ILobby, ILobbySettings } from "./data/lobby";
 
 export interface IPOSTRequestMap {
     "/lobby": {

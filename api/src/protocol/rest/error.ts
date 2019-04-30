@@ -15,7 +15,44 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export interface IError<E, M> {
-    error: E;
-    message: M;
+import { HTTPStatusCode } from "./http";
+
+export enum RestErrorCode {
+    EndpointDoesNotExist = 1000,
+    FatalError
 }
+
+export interface IError<M extends keyof typeof RestErrorCode> {
+    code: (typeof RestErrorCode)[M];
+    error: M;
+    message: string;
+}
+
+type Filter<T, U> = T extends U ? T : never;
+
+export type ErrorMap = {
+    [K in Filter<keyof typeof RestErrorCode, string>]: {
+        error: IError<K>;
+        status: HTTPStatusCode;
+    }
+};
+
+/** TODO: docgen and better layout */
+export const RestErrorMessages: ErrorMap = {
+    EndpointDoesNotExist: {
+        error: {
+            code: RestErrorCode.EndpointDoesNotExist,
+            error: "EndpointDoesNotExist",
+            message: "The endpoint requested does not exist"
+        },
+        status: HTTPStatusCode.NotFound
+    },
+    FatalError: {
+        error: {
+            code: RestErrorCode.FatalError,
+            error: "FatalError",
+            message: "There was a fatal, uncaught error in the server"
+        },
+        status: HTTPStatusCode.InternalServerError
+    }
+};

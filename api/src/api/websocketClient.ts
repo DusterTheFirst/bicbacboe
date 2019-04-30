@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { IError, IPayload } from "../protocol//ws/payloads";
-import { IServerErrorMap, IServerPayloadMap, ServerOpcode } from "../protocol//ws/server";
-import { ClientOpcode, IClientErrorMap, IClientPayloadMap } from "../protocol/ws/client";
+import { IClientErrorMap, IClientPayloadMap } from "../protocol/ws/client";
+import { IWebsocketError, IWebsocketPayload } from "../protocol/ws/payloads";
+import { IServerErrorMap, IServerPayloadMap } from "../protocol/ws/server";
 
 /** A websocket client with typings built in aswell as extra helper functions */
 export class WebsocketClient {
@@ -38,11 +38,11 @@ export class WebsocketClient {
     }
 
     public send<O extends keyof IClientPayloadMap, D extends IClientPayloadMap[O]>(opcode: O, data: D) {
-        let payload: IPayload<O, D> = { data, opcode };
+        let payload: IWebsocketPayload<O, D> = { data, opcode };
     }
 
     public error<E extends keyof IClientErrorMap, M extends IClientErrorMap[E]>(errorcode: E, message: M) {
-        let error: IError<E, M> = { error: errorcode, message };
+        let error: IWebsocketError<E, M> = { error: errorcode, message };
     }
 
 }

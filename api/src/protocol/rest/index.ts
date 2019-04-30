@@ -17,8 +17,9 @@
 
 export * from "./post";
 export * from "./get";
-export * from "./datas/lobby";
-export * from "./datas/login";
+export * from "./error";
+export * from "./data/lobby";
+export * from "./data/login";
 
 /** The only accepted content types for requests and responses */
 export enum AcceptedMimeTypes {

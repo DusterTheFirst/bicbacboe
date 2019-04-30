@@ -15,11 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { AcceptedMimeTypes } from "@bicbacboe/api";
+import { AcceptedMimeTypes, RestErrorMessages } from "@bicbacboe/api";
 import bodyParser from "body-parser";
 import compression from "compression";
 import cors from "cors";
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import expressws from "express-ws";
 import helmet from "helmet";
 import { getHandler } from "./getHandler";
@@ -27,7 +27,6 @@ import { generateLobbyID, generateUserID } from "./id";
 import { postHandler } from "./postHandler";
 
 const app = express();
-const wsapp = expressws(app);
 
 app.use(helmet());
 app.use(cors());
@@ -46,7 +45,7 @@ app.use(bodyParser.text({
 
 // app.use("/ws", wsRouter);
 
-app.post("/lobby", postHandler((req, res) => {
+app.post("/lobby", postHandler<"/lobby">((req, res) => {
     console.log(req.body);
     let lobbyID = generateLobbyID();
     res.send({
@@ -56,11 +55,26 @@ app.post("/lobby", postHandler((req, res) => {
     });
 }));
 
-app.get("/login", getHandler((req, res) => {
+app.get("/login", getHandler<"/login">((req, res) => {
     res.send({
         id: generateUserID()
     });
 }));
+
+// TODO: CORRECT TYPE
+app.use((req, res) => {
+    res.send(RestErrorMessages.EndpointDoesNotExist);
+});
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    res.json(RestErrorMessages.FatalError);
+    console.log(err);
+});
+// app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+//     const error: IFatalRESTError = {
+
+//     }
+//     res.json(error);
+// });
 
 const port = process.env.PORT === undefined ? 8080 : process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));
