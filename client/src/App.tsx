@@ -41,6 +41,17 @@ export default function App() {
             <AccountContext.Provider value={[account, setAccount]}>
                 <Notifications />
                 {account === undefined ? <Login /> : <LoggedIn />}
+                <div className="buildinfo">
+                    {JSON.stringify(process.env, undefined, 4)}
+                    <a href={process.env.REACT_APP_TRAVIS_BUILD_WEB_URL}><h1>Build Info</h1></a>
+                    <h2>Version</h2>
+                    {process.env.REACT_APP_TRAVIS_BRANCH}-{process.env.REACT_APP_TRAVIS_COMMIT}
+                    <br/>
+                    <a href={`https://github.com/DusterTheFirst/bicbacboe/commit/${process.env.REACT_APP_TRAVIS_COMMIT}`}>Changes</a>
+                    <a href={`https://github.com/DusterTheFirst/bicbacboe/tree/$${process.env.REACT_APP_TRAVIS_COMMIT}`}>Browse repository</a>
+                    <h3>Node Version</h3>
+                    {process.env.REACT_APP_TRAVIS_NODE_VERSION}
+                </div>
             </AccountContext.Provider>
         </div>
     );
