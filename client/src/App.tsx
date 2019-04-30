@@ -17,8 +17,10 @@
 
 import { IAccount, login } from "@bicbacboe/api";
 import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
+import Notifications, { notify } from "react-notify-toast";
 import { Route, Switch } from "react-router-dom";
 import "./App.scss";
+import { ErrorMessages } from "./errors";
 import { Lobby } from "./views/LobbyView";
 import MainMenuView from "./views/MainMenuView";
 import PageNotFoundView from "./views/PageNotFoundView";
@@ -31,19 +33,33 @@ export default function App() {
     let [account, setAccount] = useState<IAccount>();
 
     useEffect(() => {
-        login().then(setAccount);
+        login().then(setAccount).catch(() => notify.show(ErrorMessages.CannotConnectToServer.short, "error", 10000));
     }, []);
 
     return (
         <div className="app">
             <AccountContext.Provider value={[account, setAccount]}>
-                <pre>{JSON.stringify(account, undefined, 4)}</pre>
-                <Switch>
-                    <Route path="/lobby/:lobbyID" component={Lobby}/>
-                    <Route path={["/", "/join", "/create"]} exact={true} component={MainMenuView} />
-                    <Route component={PageNotFoundView} />
-                </Switch>
+                <Notifications />
+                {account === undefined ? <Login /> : <LoggedIn />}
             </AccountContext.Provider>
         </div>
+    );
+}
+
+function Login() {
+    return (
+        <div className="login">
+            Logging in
+        </div>
+    );
+}
+
+function LoggedIn() {
+    return (
+        <Switch>
+            <Route path="/lobby/:lobbyID" component={Lobby} />
+            <Route path={["/", "/join", "/create"]} exact={true} component={MainMenuView} />
+            <Route component={PageNotFoundView} />
+        </Switch>
     );
 }
