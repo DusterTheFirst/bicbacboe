@@ -30,7 +30,7 @@ export interface IError<M extends keyof typeof RestErrorCode> {
 
 type Filter<T, U> = T extends U ? T : never;
 
-export type ErrorMap = {
+type ErrorMap = {
     [K in Filter<keyof typeof RestErrorCode, string>]: {
         error: IError<K>;
         status: HTTPStatusCode;

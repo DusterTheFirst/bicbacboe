@@ -21,6 +21,7 @@ export enum ErrorCode {
 
 type Filter<T, U> = T extends U ? T : never;
 
+/** A mapping of error codes to their error message counterparts */
 export type ErrorMap = {
     [K in Filter<keyof typeof ErrorCode, string>]: {
         short: string;
