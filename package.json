@@ -22,10 +22,9 @@
     "lint:api": "tslint -p api/tsconfig.json",
     "lint:client": "tslint -p client/tsconfig.json",
     "lint": "npm-run-all -csnl build:api --parallel lint:**",
-    "check:api": "tsc --noEmit --project api",
     "check:server": "tsc --noEmit --project server",
     "check:client": "tsc --noEmit --project client",
-    "check": "run-s -snl build:api check:**"
+    "check": "npm-run-all -snl build:api --parallel check:**"
   },
   "devDependencies": {
     "nodemon": "^1.18.11",
