@@ -15,8 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { AcceptedMimeTypes, RestErrorMessages, RestErrorCode } from "@bicbacboe/api";
+import { AcceptedMimeTypes, RestErrorCode, RestErrorMessages, ILobby } from "@bicbacboe/api";
 import bodyParser from "body-parser";
+import Collection from "collection";
 import compression from "compression";
 import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
@@ -45,15 +46,28 @@ app.use(bodyParser.text({
 
 // app.use("/ws", wsRouter);
 
+const lobbies: Collection<string, ILobby> = new Collection();
+
 app.post("/lobby", postHandler<"/lobby">((req, res) => {
     console.log(req.body);
-    let lobbyID = generateLobbyID();
-    res.send({
-        id: lobbyID,
-        settings: req.body,
-        websocket: `/ws/lobby/${lobbyID}`
-    });
+    let lobby = {
+        id: generateLobbyID(),
+        ... req.body
+    };
+    lobbies.set(lobby.id, lobby);
+    res.send(lobby);
 }));
+
+// TODO: 404 if not found
+app.get("/lobby/:id", getHandler<"/lobby/:id">((req, res, next) => {
+    let lobby = lobbies.get(req.params.id);
+    if (lobby !== undefined) {
+        res.send(lobby);
+    } else {
+        next("OH NOES");
+    }
+}));
+
 
 app.get("/login", getHandler<"/login">((req, res) => {
     res.send({

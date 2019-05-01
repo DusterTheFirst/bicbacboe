@@ -15,15 +15,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export interface ILobby {
-    /** The lobby ID */
-    id: string;
-    /** The lobby settings */
-    settings: ILobbySettings;
-    /** The websocket to subscribe to the lobby */
-    websocket: string;
-}
-
 /** The Options to create a Lobby */
 export interface ILobbySettings {
     /** The name of the Lobby */
@@ -36,6 +27,12 @@ export interface ILobbySettings {
     matchmakingType?: MatchmakingType;
     /** If the ability for spectators is enabled */
     spectators: boolean;
+}
+
+/** A lobby */
+export interface ILobby extends ILobbySettings {
+    /** The lobby ID */
+    id: string;
 }
 
 /** The different types of lobbies */

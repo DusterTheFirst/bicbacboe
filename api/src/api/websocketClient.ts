@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { IClientErrorMap, IClientPayloadMap } from "../protocol/ws/client";
-import { IWebsocketError, IWebsocketPayload } from "../protocol/ws/payloads";
-import { IServerErrorMap, IServerPayloadMap } from "../protocol/ws/server";
+import { IClientErrorMap, IClientPayloadMap } from "../ws/client";
+import { IWebsocketError, IWebsocketPayload } from "../ws/payloads";
+import { IServerErrorMap, IServerPayloadMap } from "../ws/server";
 
 /** A websocket client with typings built in aswell as extra helper functions */
 export class WebsocketClient {

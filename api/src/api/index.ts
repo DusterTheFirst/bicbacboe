@@ -16,8 +16,8 @@
  */
 
 import msgpack from "msgpack-lite";
-import { AcceptedMimeTypes, IGETRequestMap, IPOSTRequestMap, RestErrorCode, RestErrorMap, IRestError } from "../protocol/rest";
-import { ILobbySettings } from "../protocol/rest/data/lobby";
+import { AcceptedMimeTypes, IGETRequestMap, IPOSTRequestMap, RestErrorCode, RestErrorMap, IRestError } from "../rest";
+import { ILobbySettings } from "../rest/data/lobby";
 
 const APIURL = process.env.NODE_ENV === "development" ? "http://localhost:8080" : `${process.env.PUBLIC_URL}/api`;
 

@@ -16,5 +16,5 @@
  */
 
 export * from "./api";
-export * from "./protocol/rest";
-export * from "./protocol/ws";
+export * from "./rest";
+export * from "./ws";
