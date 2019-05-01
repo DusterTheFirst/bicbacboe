@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { IAccount, login } from "@bicbacboe/api";
+import { IAccount, login, RestErrorMessages } from "@bicbacboe/api";
 import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
 import Notifications, { notify } from "react-notify-toast";
 import { Route, Switch } from "react-router-dom";
@@ -33,7 +33,15 @@ export default function App() {
     let [account, setAccount] = useState<IAccount>();
 
     useEffect(() => {
-        login().then(setAccount).catch(() => notify.show(ErrorMessages.CannotConnectToServer.short, "error", 10000));
+        login().then((loginOrError) => {
+            // TODO: Move into type gaurd
+            if (typeof loginOrError === "number") {
+                notify.show(RestErrorMessages[loginOrError].error.message, "error");
+                console.error(RestErrorMessages[loginOrError].error);
+            } else {
+                setAccount(loginOrError);
+            }
+        }).catch(() => notify.show(ErrorMessages.CannotConnectToServer.short, "error", 10000));
     }, []);
 
     return (
@@ -41,20 +49,29 @@ export default function App() {
             <AccountContext.Provider value={[account, setAccount]}>
                 <Notifications />
                 {account === undefined ? <Login /> : <LoggedIn />}
-                <div className="buildinfo">
-                    {JSON.stringify(process.env, undefined, 4)}
-                    <a href={process.env.REACT_APP_TRAVIS_BUILD_WEB_URL}><h1>Build Info</h1></a>
-                    <h2>Version</h2>
-                    {process.env.REACT_APP_TRAVIS_BRANCH}-{process.env.REACT_APP_TRAVIS_COMMIT}
-                    <br/>
-                    <a href={`https://github.com/DusterTheFirst/bicbacboe/commit/${process.env.REACT_APP_TRAVIS_COMMIT}`}>Changes</a>
-                    <a href={`https://github.com/DusterTheFirst/bicbacboe/tree/${process.env.REACT_APP_TRAVIS_COMMIT}`}>Browse repository</a>
-                    <h3>Node Version</h3>
-                    {process.env.REACT_APP_TRAVIS_NODE_VERSION}
-                </div>
+                <BuildInfo/>
             </AccountContext.Provider>
         </div>
     );
+}
+
+function BuildInfo() {
+    if (process.env.NODE_ENV === "production") {
+        return (
+            <div className="buildinfo">
+                <a href={process.env.REACT_APP_TRAVIS_BUILD_WEB_URL}>Build Info</a>
+                Version: {process.env.REACT_APP_TRAVIS_BRANCH}-{process.env.REACT_APP_TRAVIS_COMMIT}
+                <br/>
+                <a href={`https://github.com/DusterTheFirst/bicbacboe/commit/${process.env.REACT_APP_TRAVIS_COMMIT}`}>Changes</a>
+                {" "}
+                <a href={`https://github.com/DusterTheFirst/bicbacboe/tree/${process.env.REACT_APP_TRAVIS_COMMIT}`}>Browse repository</a>
+                <br/>
+                Node Version: {process.env.REACT_APP_TRAVIS_NODE_VERSION}
+            </div>
+        );
+    } else {
+        return null;
+    }
 }
 
 function Login() {

@@ -16,7 +16,7 @@
  */
 
 import { createLobby, LobbyType, MatchmakingType } from "@bicbacboe/api";
-import React from "react";
+import React, { useState } from "react";
 import { Radio, RadioGroup } from "react-radio-group";
 import { Prompt } from "react-router-dom";
 import useRouter from "use-react-router";
@@ -30,16 +30,18 @@ export default function CreateMenu() {
         passphrase: "",
         spectators: false
     });
+    let [ navigatingAway, setNavigatingAway ] = useState(false);
     let { history } = useRouter();
 
     const createLobbyFn = async () => {
         let lobby = await createLobby(lobbySettings);
+        setNavigatingAway(true);
         history.push(`/lobby/${lobby.id}`);
     };
 
     return (
         <div className="create-menu">
-            <Prompt when={isEdited} message="Are you sure you want to leave? You will lose all of the settings for this game" />
+            <Prompt when={isEdited && !navigatingAway} message="Are you sure you want to leave? You will lose all of the settings for this game" />
             <div className="header">Create a Lobby</div>
             <label>
                 Lobby Name

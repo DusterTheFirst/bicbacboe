@@ -22,24 +22,25 @@ export enum RestErrorCode {
     FatalError
 }
 
-export interface IError<M extends keyof typeof RestErrorCode> {
-    code: (typeof RestErrorCode)[M];
-    error: M;
+export interface IRestError<M extends ValuesOf<typeof RestErrorCode>> {
+    code: M;
+    error: (typeof RestErrorCode)[M];
     message: string;
 }
 
 type Filter<T, U> = T extends U ? T : never;
+type ValuesOf<T> = T[keyof T];
 
-type ErrorMap = {
-    [K in Filter<keyof typeof RestErrorCode, string>]: {
-        error: IError<K>;
+export type RestErrorMap = {
+    [K in ValuesOf<typeof RestErrorCode>]: {
+        error: IRestError<K>;
         status: HTTPStatusCode;
     }
 };
 
 /** TODO: docgen and better layout */
-export const RestErrorMessages: ErrorMap = {
-    EndpointDoesNotExist: {
+export const RestErrorMessages: RestErrorMap = {
+    [RestErrorCode.EndpointDoesNotExist]: {
         error: {
             code: RestErrorCode.EndpointDoesNotExist,
             error: "EndpointDoesNotExist",
@@ -47,7 +48,7 @@ export const RestErrorMessages: ErrorMap = {
         },
         status: HTTPStatusCode.NotFound
     },
-    FatalError: {
+    [RestErrorCode.FatalError]: {
         error: {
             code: RestErrorCode.FatalError,
             error: "FatalError",

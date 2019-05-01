@@ -16,7 +16,7 @@
  */
 
 import msgpack from "msgpack-lite";
-import { AcceptedMimeTypes, IGETRequestMap, IPOSTRequestMap } from "../protocol/rest";
+import { AcceptedMimeTypes, IGETRequestMap, IPOSTRequestMap, RestErrorCode, RestErrorMap, IRestError } from "../protocol/rest";
 import { ILobbySettings } from "../protocol/rest/data/lobby";
 
 const APIURL = process.env.NODE_ENV === "development" ? "http://localhost:8080" : `${process.env.PUBLIC_URL}/api`;
@@ -52,7 +52,7 @@ async function POST<P extends keyof IPOSTRequestMap, B extends IPOSTRequestMap[P
     }
 }
 
-async function GET<P extends keyof IGETRequestMap, R extends IGETRequestMap[P]>(path: P): Promise<R> {
+async function GET<P extends keyof IGETRequestMap, R extends IGETRequestMap[P]>(path: P): Promise<R | RestErrorCode> {
     let response = await fetch(`${APIURL}${path}`, {
         headers: {
             "Accept": AcceptedMimeTypes.MessagePack,
@@ -64,7 +64,7 @@ async function GET<P extends keyof IGETRequestMap, R extends IGETRequestMap[P]>(
     if (response.ok) {
         return msgpack.decode(new Uint8Array(await response.arrayBuffer())) as R;
     } else {
-        // FIXME:
-        throw response.status;
+        // FIXME: msgpack
+        return (await response.json() as IRestError<keyof RestErrorMap>).code;
     }
 }

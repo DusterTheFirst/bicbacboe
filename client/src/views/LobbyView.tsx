@@ -15,25 +15,39 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { getLobby, ILobby } from "@bicbacboe/api";
+import { getLobby, ILobby, RestErrorCode, RestErrorMessages } from "@bicbacboe/api";
 import React, { useEffect, useState } from "react";
+import { Link, Prompt } from "react-router-dom";
 import useRouter from "use-react-router";
 
 export function Lobby() {
-    let { match } = useRouter();
-    let lobby = useLobby("0");
+    let { match } = useRouter<{ lobbyID: string }>();
+    let lobby = useLobby(match.params.lobbyID);
+
+    let error = typeof lobby === "number"
+        ? RestErrorMessages[lobby].error
+        : false;
 
     return (
         <div className="lobby">
-            <pre>{JSON.stringify(match, undefined, 4)}</pre>
-            <pre>{JSON.stringify(lobby, undefined, 4)}</pre>
-            Lobby
+            {
+                error !== false ?
+                <pre>{JSON.stringify(error, undefined, 4)}</pre> :
+                (
+                    <>
+                        <Prompt when={lobby !== undefined} message="Are you sure you want to leave this lobby" />
+                        Info for lobby #{match.params.lobbyID}
+                        {lobby === undefined ? <div>Loading...</div> : <pre>{JSON.stringify(lobby, undefined, 4)}</pre>}
+                        <Link to="/">Go home</Link>
+                    </>
+                )
+            }
         </div>
     );
 }
 
-function useLobby(id: string): undefined | ILobby {
-    let [lobby, setLobby] = useState<ILobby>();
+function useLobby(id: string) {
+    let [lobby, setLobby] = useState<ILobby | RestErrorCode>();
 
     useEffect(() => {
         getLobby(id).then(setLobby);

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { AcceptedMimeTypes, RestErrorMessages } from "@bicbacboe/api";
+import { AcceptedMimeTypes, RestErrorMessages, RestErrorCode } from "@bicbacboe/api";
 import bodyParser from "body-parser";
 import compression from "compression";
 import cors from "cors";
@@ -63,10 +63,12 @@ app.get("/login", getHandler<"/login">((req, res) => {
 
 // TODO: CORRECT TYPE
 app.use((req, res) => {
-    res.send(RestErrorMessages.EndpointDoesNotExist);
+    res.status(RestErrorMessages[RestErrorCode.EndpointDoesNotExist].status)
+        .send(RestErrorMessages[RestErrorCode.EndpointDoesNotExist].error);
 });
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    res.json(RestErrorMessages.FatalError);
+    res.status(RestErrorMessages[RestErrorCode.FatalError].status)
+        .json(RestErrorMessages[RestErrorCode.FatalError].error);
     console.log(err);
 });
 // app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
