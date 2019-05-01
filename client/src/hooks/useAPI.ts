@@ -15,14 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from "./post";
-export * from "./get";
-export * from "./error";
-export * from "./data/lobby";
-export * from "./data/login";
+import { useContext } from "react";
+import { APIContext } from "../App";
 
-/** The only accepted content types for requests and responses */
-export enum AcceptedMimeTypes {
-    MessagePack = "application/msgpack",
-    JSON = "application/json"
+/** Hook to connect to the API */
+export function useAPI() {
+    return useContext(APIContext);
 }

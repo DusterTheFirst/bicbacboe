@@ -15,7 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { AcceptedMimeTypes, RestErrorCode, RestErrorMessages, ILobby } from "@bicbacboe/api";
+import { ILobby, RestErrorCode, RestErrorMessages } from "@bicbacboe/api";
+import IAPITypings from "@bicbacboe/api/build/rest/api";
 import bodyParser from "body-parser";
 import Collection from "collection";
 import compression from "compression";
@@ -23,21 +24,16 @@ import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import expressws from "express-ws";
 import helmet from "helmet";
-import { getHandler } from "./getHandler";
+import RestypedRouter from "restyped-express-async";
 import { generateLobbyID, generateUserID } from "./id";
-import { postHandler } from "./postHandler";
 
 const app = express();
+const router = RestypedRouter<IAPITypings>(app);
 
 app.use(helmet());
 app.use(cors());
 app.use(compression());
-app.use(bodyParser.raw({
-    type: AcceptedMimeTypes.MessagePack
-}));
-app.use(bodyParser.text({
-    type: AcceptedMimeTypes.JSON
-}));
+app.use(bodyParser.json());
 
 // const wsRouter = express.Router();
 // wsRouter.ws("/game-listing", (ws, req) => {
@@ -48,32 +44,32 @@ app.use(bodyParser.text({
 
 const lobbies: Collection<string, ILobby> = new Collection();
 
-app.post("/lobby", postHandler<"/lobby">((req, res) => {
+router.post("/lobby", async (req) => {
     console.log(req.body);
     let lobby = {
         id: generateLobbyID(),
         ... req.body
     };
     lobbies.set(lobby.id, lobby);
-    res.send(lobby);
-}));
+
+    return lobby;
+});
 
 // TODO: 404 if not found
-app.get("/lobby/:id", getHandler<"/lobby/:id">((req, res, next) => {
+router.get("/lobby/:id", async (req) => {
     let lobby = lobbies.get(req.params.id);
     if (lobby !== undefined) {
-        res.send(lobby);
+        return lobby;
     } else {
-        next("OH NOES");
+        throw new Error("OH NOES");
     }
-}));
+});
 
-
-app.get("/login", getHandler<"/login">((req, res) => {
-    res.send({
+router.get("/login", async () => {
+    return {
         id: generateUserID()
-    });
-}));
+    };
+});
 
 // TODO: CORRECT TYPE
 app.use((req, res) => {

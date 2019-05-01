@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { IAccount, login, RestErrorMessages } from "@bicbacboe/api";
+import { Client, IAccount } from "@bicbacboe/api";
 import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
 import Notifications, { notify } from "react-notify-toast";
 import { Route, Switch } from "react-router-dom";
@@ -28,29 +28,28 @@ import PageNotFoundView from "./views/PageNotFoundView";
 type StateContext<T> = [T, Dispatch<SetStateAction<T>>];
 
 export const AccountContext = createContext<StateContext<IAccount | undefined>>([undefined, () => void 0]);
+export const APIContext = createContext<Client>(new Client());
+
+const client = new Client();
 
 export default function App() {
     let [account, setAccount] = useState<IAccount>();
 
     useEffect(() => {
-        login().then((loginOrError) => {
-            // TODO: Move into type gaurd
-            if (typeof loginOrError === "number") {
-                notify.show(RestErrorMessages[loginOrError].error.message, "error");
-                console.error(RestErrorMessages[loginOrError].error);
-            } else {
-                setAccount(loginOrError);
-            }
+        client.login().then((login) => {
+            setAccount(login);
         }).catch(() => notify.show(ErrorMessages.CannotConnectToServer.short, "error", 10000));
     }, []);
 
     return (
         <div className="app">
-            <AccountContext.Provider value={[account, setAccount]}>
-                <Notifications />
-                {account === undefined ? <Login /> : <LoggedIn />}
-                <BuildInfo/>
-            </AccountContext.Provider>
+            <APIContext.Provider value={client}>
+                <AccountContext.Provider value={[account, setAccount]}>
+                    <Notifications />
+                    {account === undefined ? <Login /> : <LoggedIn />}
+                    <BuildInfo/>
+                </AccountContext.Provider>
+            </APIContext.Provider>
         </div>
     );
 }

@@ -16,5 +16,9 @@
  */
 
 export * from "./api";
-export * from "./rest";
+export * from "./rest/api";
+export * from "./rest/data/lobby";
+export * from "./rest/data/login";
+export * from "./rest/error";
+export * from "./rest/http";
 export * from "./ws";

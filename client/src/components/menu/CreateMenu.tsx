@@ -15,11 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { createLobby, LobbyType, MatchmakingType } from "@bicbacboe/api";
+import { LobbyType, MatchmakingType } from "@bicbacboe/api";
 import React, { useState } from "react";
 import { Radio, RadioGroup } from "react-radio-group";
 import { Prompt } from "react-router-dom";
 import useRouter from "use-react-router";
+import { useAPI } from "../../hooks/useAPI";
 import useLobbySettings from "../../hooks/useLobbySettings";
 
 /** The section of the menu dedicated to creating a lobby */
@@ -32,9 +33,10 @@ export default function CreateMenu() {
     });
     let [ navigatingAway, setNavigatingAway ] = useState(false);
     let { history } = useRouter();
+    let client = useAPI();
 
     const createLobbyFn = async () => {
-        let lobby = await createLobby(lobbySettings);
+        let lobby = await client.createLobby(lobbySettings);
         setNavigatingAway(true);
         history.push(`/lobby/${lobby.id}`);
     };

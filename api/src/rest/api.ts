@@ -16,10 +16,34 @@
  */
 
 import { ILobby, ILobbySettings } from "./data/lobby";
+import { IAccount } from "./data/login";
 
-export interface IPOSTRequestMap {
+// TODO: include errors in response smthn like that json thing
+export interface IAPITypings {
     "/lobby": {
-        req: ILobbySettings;
-        res: ILobby;
+        POST: {
+            body: ILobbySettings;
+            response: ILobby;
+        };
+    };
+    "/lobby/:id": {
+        GET: {
+            params: {
+                id: string;
+            };
+            response: ILobby;
+        };
+        PUT: {
+            params: {
+                id: string;
+            };
+            body: ILobbySettings;
+            response: ILobby;
+        };
+    };
+    "/login": {
+        GET: {
+            response: IAccount;
+        };
     };
 }

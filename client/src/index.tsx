@@ -29,7 +29,8 @@ ReactDOM.render(
         <HashRouter>
             <App />
         </HashRouter>
-    ), document.getElementById("root"));
+    ),
+    document.getElementById("root"));
 
 const textoutlinecss = "text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;";
 

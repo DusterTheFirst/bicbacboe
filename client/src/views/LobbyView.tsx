@@ -15,10 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { getLobby, ILobby, RestErrorCode, RestErrorMessages } from "@bicbacboe/api";
+import { ILobby, RestErrorCode, RestErrorMessages } from "@bicbacboe/api";
 import React, { useEffect, useState } from "react";
 import { Link, Prompt } from "react-router-dom";
 import useRouter from "use-react-router";
+import { useAPI } from "../hooks/useAPI";
 
 export function Lobby() {
     let { match } = useRouter<{ lobbyID: string }>();
@@ -30,17 +31,18 @@ export function Lobby() {
 
     return (
         <div className="lobby">
+            {/* tslint:disable-next-line: jsx-no-multiline-js */}
             {
                 error !== false ?
-                <pre>{JSON.stringify(error, undefined, 4)}</pre> :
-                (
-                    <>
-                        <Prompt when={lobby !== undefined} message="Are you sure you want to leave this lobby" />
-                        Info for lobby #{match.params.lobbyID}
-                        {lobby === undefined ? <div>Loading...</div> : <pre>{JSON.stringify(lobby, undefined, 4)}</pre>}
-                        <Link to="/">Go home</Link>
-                    </>
-                )
+                    <pre>{JSON.stringify(error, undefined, 4)}</pre> :
+                    (
+                        <>
+                            <Prompt when={lobby !== undefined} message="Are you sure you want to leave this lobby" />
+                            Info for lobby #{match.params.lobbyID}
+                            {lobby === undefined ? <div>Loading...</div> : <pre>{JSON.stringify(lobby, undefined, 4)}</pre>}
+                            <Link to="/">Go home</Link>
+                        </>
+                    )
             }
         </div>
     );
@@ -48,10 +50,11 @@ export function Lobby() {
 
 function useLobby(id: string) {
     let [lobby, setLobby] = useState<ILobby | RestErrorCode>();
+    let client = useAPI();
 
     useEffect(() => {
-        getLobby(id).then(setLobby);
-    }, [id]);
+        client.getLobby(id).then(setLobby);
+    }, [id, client]);
 
     return lobby;
 }
