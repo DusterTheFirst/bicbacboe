@@ -15,8 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { ILobby, RestErrorCode, RestErrorMessages } from "@bicbacboe/api";
-import IAPITypings from "@bicbacboe/api/build/rest/api";
+import { IAPITypings, ILobby, RestErrorCode, RestErrorMessages } from "@bicbacboe/api";
 import bodyParser from "body-parser";
 import Collection from "collection";
 import compression from "compression";
@@ -46,7 +45,7 @@ const lobbies: Collection<string, ILobby> = new Collection();
 
 router.post("/lobby", async (req) => {
     console.log(req.body);
-    let lobby = {
+    let lobby: ILobby = {
         id: generateLobbyID(),
         ... req.body
     };
