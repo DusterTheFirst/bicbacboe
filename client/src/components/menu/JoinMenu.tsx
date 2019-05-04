@@ -16,12 +16,18 @@
  */
 
 import React from "react";
+import { useLobbies } from "../../hooks/useAPI";
 
 /** The section of the menu dedicated to finding and joining a Lobby */
 export default function JoinMenu() {
+    let [lobbies, reloadLobbies] = useLobbies();
+
     return (
-        <>
-            join
-        </>
+        <div className="join">
+            <button onClick={reloadLobbies}>Reload</button>
+            <pre>
+                {JSON.stringify(lobbies, undefined, 4)}
+            </pre>
+        </div>
     );
 }

@@ -15,11 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { ILobby, RestErrorCode, RestErrorMessages } from "@bicbacboe/api";
-import React, { useEffect, useState } from "react";
+import { RestErrorMessages } from "@bicbacboe/api";
+import React from "react";
 import { Link, Prompt } from "react-router-dom";
 import useRouter from "use-react-router";
-import { useAPI } from "../hooks/useAPI";
+import { useLobby } from "../hooks/useAPI";
 
 export function Lobby() {
     let { match } = useRouter<{ lobbyID: string }>();
@@ -46,15 +46,4 @@ export function Lobby() {
             }
         </div>
     );
-}
-
-function useLobby(id: string) {
-    let [lobby, setLobby] = useState<ILobby | RestErrorCode>();
-    let client = useAPI();
-
-    useEffect(() => {
-        client.getLobby(id).then(setLobby);
-    }, [id, client]);
-
-    return lobby;
 }

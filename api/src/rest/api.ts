@@ -26,6 +26,11 @@ export interface IAPITypings {
             response: ILobby;
         };
     };
+    "/lobbies": {
+        GET: {
+            response: ILobby[];
+        };
+    };
     "/lobby/:id": {
         GET: {
             params: {

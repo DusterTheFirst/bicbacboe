@@ -15,10 +15,38 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useContext } from "react";
+import { ILobby, RestErrorCode } from "@bicbacboe/api";
+import { useContext, useState, useEffect } from "react";
 import { APIContext } from "../App";
 
 /** Hook to connect to the API */
 export function useAPI() {
     return useContext(APIContext);
+}
+
+export function useLobby(id: string) {
+    let [lobby, setLobby] = useState<ILobby | RestErrorCode>();
+    let client = useAPI();
+
+    useEffect(() => {
+        client.getLobby(id).then(setLobby);
+    }, [id, client]);
+
+    return lobby;
+}
+
+export function useLobbies(): [ILobby[] | RestErrorCode | undefined, () => void] {
+    let [lobbies, setLobbies] = useState<ILobby[] | RestErrorCode>();
+    let client = useAPI();
+
+    const reloadLobbies = () => {
+        setLobbies(undefined);
+        client.getLobbies().then(setLobbies);
+    };
+
+    useEffect(() => {
+        reloadLobbies();
+    }, [client]);
+
+    return [lobbies, reloadLobbies];
 }

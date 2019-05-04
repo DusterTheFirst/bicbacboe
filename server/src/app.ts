@@ -64,6 +64,10 @@ router.get("/lobby/:id", async (req) => {
     }
 });
 
+router.get("/lobbies", async (req) => {
+    return lobbies.array();
+});
+
 router.get("/login", async () => {
     return {
         id: generateUserID()

@@ -29,7 +29,11 @@ export class Client {
     }
 
     public async createLobby(settings: ILobbySettings): Promise<ILobby> {
-        let response = await this.client.post("/lobby", settings);
+        let response = await this.client.request({
+            data: settings,
+            method: "POST",
+            url: "/lobby"
+        });
 
         if (response.status === 200) {
             return response.data;
@@ -39,7 +43,9 @@ export class Client {
     }
 
     public async login(): Promise<IAccount> {
-        let response = await this.client.get("/login");
+        let response = await this.client.request({
+            url: "/login"
+        });
 
         if (response.status === 200) {
             return response.data;
@@ -49,7 +55,23 @@ export class Client {
     }
 
     public async getLobby(id: string): Promise<ILobby> {
-        let response = await this.client.get<"/lobby/:id">(`/lobby/${id}`);
+        let response = await this.client.request({
+            method: "GET",
+            url: `/lobby/${id}` as "/lobby/:id",
+        });
+
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error(`${response.status}: ${response.statusText}`);
+        }
+    }
+
+    public async getLobbies(): Promise<ILobby[]> {
+        let response = await this.client.request({
+            method: "GET",
+            url: "/lobbies"
+        });
 
         if (response.status === 200) {
             return response.data;
@@ -59,7 +81,11 @@ export class Client {
     }
 
     public async updateLobby(id: string, settings: ILobbySettings): Promise<ILobby> {
-        let response = await this.client.put<"/lobby/:id">(`/lobby/${id}`, settings);
+        let response = await this.client.request({
+            data: settings,
+            method: "PUT",
+            url: `/lobby/${id}` as "/lobby/:id"
+        });
 
         if (response.status === 200) {
             return response.data;
